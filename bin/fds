@@ -1,13 +1,27 @@
 #!/usr/bin/env node
 
 var path = require('path');
+var fs = require('fs-extra');
 var nodemon = require('nodemon');
 
-nodemon({
-	script: path.resolve(__dirname, '../index.js'),
-	ext: 'js json'
-});
 
-nodemon.on('restart', function () {
-	console.log('FE Dev Server is restarting ....');
-});
+if (process.argv[2] === 'init') {
+	fs.copy(path.resolve(__dirname, '../example'), '.', function (err) {
+		if (err) {
+			console.error(err);
+			return;
+		}
+		console.log('Project inited.');
+	});
+} else {
+	nodemon({
+		script: path.resolve(__dirname, '../index.js'),
+		ext: 'js json'
+	});
+
+	nodemon.on('restart', function () {
+		console.log('FE Dev Server is restarting ....');
+	});
+}
+
+
