@@ -7,16 +7,16 @@ The server is built on `express` and `nodemon`, so it will restart automatically
 ## How to run
 
 ```
-// install module globally
+# install module globally
 npm install -g fe-dev-server
 
-// create project folder and get into the folder
+# create project folder and get into the folder
 mkdir workdir && cd workdir
 
-// initial the project folder
+# initial the project folder
 fds init
 
-// start up server
+# start up server
 fds
 ```
 
@@ -26,11 +26,11 @@ Routes is stored in `routes.js` as key/value pairs by default.
 
 Sample:
 
-```
+```js
 module.exports = {
-	'/test':         'test.html',
-	'GET::/books':   'books.jade',
-	'POST::/api/books':  'mock::books.json'
+	'/test':         		'test.html',
+	'GET::/books':   		'books.jade',
+	'POST::/api/books':  	'mock::books.json'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
@@ -79,7 +79,3 @@ routes mapping file
 default: 3000
 
 express server port
-
-
-
-
