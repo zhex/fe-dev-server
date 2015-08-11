@@ -1,5 +1,13 @@
 #!/usr/bin/env node
 
-var server = require('../index');
+var path = require('path');
+var nodemon = require('nodemon');
 
-server({});
+nodemon({
+	script: path.resolve(__dirname, '../index.js'),
+	ext: 'js json'
+});
+
+nodemon.on('restart', function () {
+	console.log('Server restarted ....');
+});
