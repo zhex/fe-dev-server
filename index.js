@@ -11,7 +11,8 @@ var defaultConfig = {
 	publicFolder: 'public',
 	viewFolder: 'views',
 	mockFolder: 'mocks',
-	routeFile: 'routes.js'
+	routeFile: 'routes.js',
+	port: 3000
 };
 
 var SYMBOL_MOCK = 'mock::';
@@ -27,7 +28,7 @@ function extendConfig(config) {
 
 var server = module.exports = function (config) {
 	var app = express();
-	var port = config.port || 3000;
+	var port = config.port;
 
 	config = extendConfig(config || {});
 
