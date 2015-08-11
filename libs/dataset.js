@@ -1,4 +1,5 @@
 var path = require('path');
+var fs = require('fs');
 
 function DataSet(path) {
 	this.path = path;
@@ -6,8 +7,10 @@ function DataSet(path) {
 
 DataSet.prototype.get = function (file) {
 	var ext = path.extname(file);
-	var dataFile = file.replace(ext, '.json');
-	return require(path.resolve(this.path, dataFile));
+	var regexp = new RegExp('\\' + ext + '$');
+	var dataFile = file.replace(regexp, '.json');
+	var file = path.resolve(this.path, dataFile);
+	return fs.existsSync(file) ? require(file) : {};
 };
 
 module.exports = DataSet;

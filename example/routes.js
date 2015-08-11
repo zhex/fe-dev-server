@@ -1,5 +1,6 @@
 module.exports = {
-	'GET::/': 'index.html',
-	'GET::/test': 'index2.jade',
+	'get::/': 'index.html',
+	'get::/test': 'index2.jade',
+	'get::/api/test': 'mock::test.json'
 };
 
