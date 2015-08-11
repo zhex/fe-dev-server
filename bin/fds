@@ -9,5 +9,5 @@ nodemon({
 });
 
 nodemon.on('restart', function () {
-	console.log('Server restarted ....');
+	console.log('FE Dev Server is restarting ....');
 });

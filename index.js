@@ -3,6 +3,7 @@ var express = require('express');
 var cons = require('consolidate');
 var assign = require('object-assign');
 var Router = require('./libs/router');
+var DataSet = require('./libs/dataset');
 
 var defaultConfig = {
 	basePath: './example',
@@ -23,8 +24,10 @@ var server = module.exports = function (config) {
 	var app = express();
 	var port = config.port || 3000;
 
-	config = extendConfig(config);
+	config = extendConfig(config || {});
+
 	var router = new Router(config.routeFile);
+	var ds = new DataSet(config.mockFolder);
 
 	app.use(require('morgan')('dev'));
 
@@ -40,7 +43,8 @@ var server = module.exports = function (config) {
 		var match = router.search(route, req.method);
 
 		if (match) {
-			res.render(match);
+			var data =ds.get(match);
+			res.render(match, data);
 		} else {
 			res.status(404).send('404 Error');
 		}

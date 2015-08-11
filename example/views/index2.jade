@@ -1,5 +1,8 @@
-doctype
-html
-	head
-		title TEST
-	body this is the test page (index2.jade)
+extend ./_partials/layout.jade
+
+
+block content
+	h1 this is the title
+	p
+		| count is
+		span= count

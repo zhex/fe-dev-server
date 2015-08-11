@@ -1,6 +1,6 @@
 {
   "name": "fe-dev-server",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "a dev server for frontend work",
   "main": "index.js",
   "bin": {

@@ -1,5 +1,5 @@
 module.exports = {
-	"GET::/": "index.html",
-	"/test": "index2.jade",
-	"": "index.html"
+	'GET::/': 'index.html',
+	'GET::/test': 'index2.jade',
 };
+
