@@ -1,6 +1,6 @@
 {
   "name": "fe-dev-server",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "a dev server for frontend work",
   "main": "index.js",
   "bin": {
@@ -17,13 +17,13 @@
   },
   "readme": "README.md",
   "keywords": [
-	"frontend",
-	"express",
-	"dev server",
-	"nodemon",
-	"jade",
-	"ejs",
-	"haml",
+  	"frontend",
+  	"express",
+  	"dev server",
+  	"nodemon",
+  	"jade",
+  	"ejs",
+  	"haml"
   ],
   "dependencies": {
     "consolidate": "^0.13.1",

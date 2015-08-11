@@ -27,13 +27,12 @@ function extendConfig(config) {
 }
 
 var server = module.exports = function (config) {
-	var app = express();
-	var port = config.port;
-
 	config = extendConfig(config || {});
 
 	var router = new Router(config.routeFile);
 	var ds = new DataSet(config.mockFolder);
+
+	var app = express();
 
 	app.use(require('morgan')('dev'));
 	app.use(express.static(config.publicFolder));
@@ -44,7 +43,6 @@ var server = module.exports = function (config) {
 
 	app.set('view engine', 'html');
 	app.set('views', config.viewFolder);
-
 
 	app.all('/:pattern(*)', function (req, res) {
 		var route = '/' + req.params.pattern;
@@ -69,8 +67,8 @@ var server = module.exports = function (config) {
 		}
 	});
 
-	app.listen(port, function () {
-		console.log('FE Dev Server is listening on port ' + port);
+	app.listen(config.port, function () {
+		console.log('FE Dev Server is listening on port ' + config.port);
 	});
 
 	return app;
