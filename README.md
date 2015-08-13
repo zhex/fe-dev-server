@@ -13,28 +13,28 @@ The server is built on `express` and `nodemon`, so it will restart automatically
 
 ## How to run
 
-Install it as a command line tool with the following step.
+Install it as a command line tool with the following step:
 
 
-** Install module globally **
+Install module globally
 
 ```
 $ npm install -g fe-dev-server
 ```
 
-** create project folder and get into the folder **
+create project folder and get into the folder
 
 ```
 $ mkdir workdir && cd workdir
 ```
 
-** initial the project folder **
+initial the project folder
 
 ```
 $ fds init
 ```
 
-** start up server **
+start up server
 
 ```
 $ fds
