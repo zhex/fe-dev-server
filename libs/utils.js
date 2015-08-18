@@ -7,3 +7,11 @@ exports.isObject = function (obj) {
 exports.isArray = function (obj) {
 	return toString.call(obj) === '[object Array]';
 };
+
+exports.isFunc = function (obj) {
+	return toString.call(obj) === '[object Function]';
+};
+
+exports.contains = function (arr, item) {
+	return arr.indexOf(item) >= 0;
+};

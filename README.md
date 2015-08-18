@@ -62,7 +62,8 @@ Sample:
 module.exports = {
 	'/test':         		'test.html',
 	'GET::/books':   		'books.jade',
-	'POST::/api/books':  	'mock::books.json'
+	'POST::/api/books':  	'mock::books.json',
+	'GET::/api/category':  	'mock::category.js'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
@@ -71,7 +72,18 @@ Allowed method: `GET`, `POST`, `PUT`, `PATCH`, `DETELE`
 
 `GET` will be used if it is not specified.
 
-If you want to setup an ajax api url, you can set the template to a json file. The server will look for the json file in view folder and send back it as a json object. the data in the view folder sounds not make sense. So if you want put the json file in the mock folder, then you can add a `mock::` prefix in the template path, then the server will look for the file in mock folder.
+If you want to setup an ajax api url, you can set the template to a json file. The server will look for the json/js file in view folder and send back it as a json object. the data in the view folder sounds not make sense. So if you want put the json/js file in the mock folder, then you can add a `mock::` prefix in the template path, then the server will look for the file in mock folder.
+
+If the mock file is a js file, then it should define as a module function:
+
+```js
+module.exports = function (params) {
+	return {
+		name: params.name || 'hello world'
+	};
+};
+```
+The `params` is the query data from request url, so you can easily test your page with different api return.
 
 ## embedded template engines
 
