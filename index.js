@@ -1,10 +1,13 @@
 var path = require('path');
 var fs = require('fs');
+var url = require('url');
 var express = require('express');
 var cons = require('consolidate');
 var assign = require('object-assign');
+var proxy = require('proxy-middleware');
 var Router = require('./libs/router');
 var DataSet = require('./libs/dataset');
+var utils = require('./libs/utils');
 
 var defaultConfig = {
 	basePath: path.resolve(__dirname, './example'),
@@ -12,13 +15,14 @@ var defaultConfig = {
 	viewFolder: 'views',
 	mockFolder: 'mocks',
 	routeFile: 'routes.js',
+	proxy: null,
 	port: 3000
 };
 
 var SYMBOL_MOCK = 'mock::';
 
 function extendConfig(config) {
-	config = assign(defaultConfig, config);
+	config = assign({}, defaultConfig, config);
 	config.viewFolder = path.resolve(config.basePath, config.viewFolder);
 	config.mockFolder = path.resolve(config.basePath, config.mockFolder);
 	config.publicFolder = path.resolve(config.basePath, config.publicFolder);
@@ -44,6 +48,12 @@ var server = module.exports = function (config) {
 	app.set('view engine', 'html');
 	app.set('views', config.viewFolder);
 
+	if (config.proxy && utils.isObject(config.proxy)) {
+		Object.keys(config.proxy).forEach(function (k) {
+			app.use(k, proxy(url.parse(config.proxy[k])));
+		});
+	}
+
 	app.all('/:pattern(*)', function (req, res) {
 		var route = '/' + req.params.pattern;
 		var match = router.search(route, req.method);
@@ -59,7 +69,7 @@ var server = module.exports = function (config) {
 				data = require(path.resolve(folder, match));
 				res.json(data);
 			} else {
-				data =ds.get(match);
+				data = ds.get(match);
 				res.render(match, data);
 			}
 		} else {

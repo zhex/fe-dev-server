@@ -84,6 +84,18 @@ If you want to setup an ajax api url, you can set the template to a json file. T
 
 You can custom your configuration in `fds-config.js` file.
 
+```js
+defaultConfig = {
+	basePath: path.resolve(__dirname, './example'),
+	publicFolder: 'public',
+	viewFolder: 'views',
+	mockFolder: 'mocks',
+	routeFile: 'routes.js',
+	proxy: null,
+	port: 3000
+}
+```
+
 ### basePath
 
 The base path of the project, all other folder settings are related to base path.
@@ -113,6 +125,19 @@ Where you can put your image, style and js files here. This folder is set by `ex
 default: 'routes.js'
 
 routes mapping file
+
+
+### proxy
+
+default: null
+
+During the test, we want to get the api data from the real backend server; then we can proxy the url to the backend server. And multiple proxies are allowed.
+
+```js
+proxy: {
+	'/api': 'http://www.example.com/api'
+}
+```
 
 ### port
 
