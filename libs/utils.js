@@ -15,3 +15,7 @@ exports.isFunc = function (obj) {
 exports.contains = function (arr, item) {
 	return arr.indexOf(item) >= 0;
 };
+
+exports.moment = require('moment');
+
+exports.assign = require('object-assign');

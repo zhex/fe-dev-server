@@ -9,6 +9,7 @@ FE Dev Server target to help frontend web developers create view template, style
 3. Mock data can be provided with a simple json file.
 4. Auto restart the server if any configuration changed.
 
+
 The server is built on `express` and `nodemon`, so it will restart automatically when your file changes.
 
 ## How to run
@@ -77,13 +78,24 @@ If you want to setup an ajax api url, you can set the template to a json file. T
 If the mock file is a js file, then it should define as a module function:
 
 ```js
-module.exports = function (params) {
+module.exports = function (params, utils) {
 	return {
 		name: params.name || 'hello world'
 	};
 };
 ```
 The `params` is the query data from request url, so you can easily test your page with different api return.
+
+`utils` provide some easy to use method to handle the data.
+
+available method:
+
+- utils.isObject(obj)
+- utils.isArray(obj)
+- utils.isFunc(obj)
+- utils.contains(array, item)
+- utils.assign() - which is [object-assign](https://www.npmjs.com/package/object-assign) library
+- utils.moment() - which is [moment](http://momentjs.com/) library
 
 ## embedded template engines
 

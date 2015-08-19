@@ -1,2 +1,4 @@
 .*
 *.md
+node_modules/
+test/

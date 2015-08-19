@@ -17,7 +17,7 @@ module.exports = function (config) {
 			var ds = new DataSet(isView ? config.viewFolder : config.mockFolder);
 			var data = ds.get(match);
 
-			if (utils.isFunc(data)) data = data(req.query);
+			if (utils.isFunc(data)) data = data(req.query, utils);
 			return data;
 		}
 
