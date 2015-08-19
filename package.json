@@ -7,7 +7,7 @@
     "fds": "./bin/fds"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "author": "ZheX <zhex81@gmail.com>",
   "license": "MIT",
@@ -37,5 +37,9 @@
     "object-assign": "^3.0.0",
     "path-to-regexp": "^1.2.0",
     "proxy-middleware": "^0.13.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^7.0.4"
   }
 }
