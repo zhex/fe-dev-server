@@ -1,16 +1,14 @@
-# FE Dev Server
+# FE Dev Server ![build status](https://travis-ci.org/zhex/fe-dev-server.svg)
 
 FE Dev Server target to help frontend web developers create view template, styles and js easily. It try the best to simulate real server environment which can help you to make you job done. 
 
 ## Features
 
-1. Various template engines and view data is allowed by just adding a simple json file.
+1. Various template engines and view data is allowed by just adding a simple data map file.
 2. Simulate urls and then you don't need to change your page urls when you merge your code into backend server.
-3. Mock data can be provided with a simple json file.
+3. Mock data can be provided with a simple json/js file.
 4. Auto restart the server if any configuration changed.
-
-
-The server is built on `express` and `nodemon`, so it will restart automatically when your file changes.
+5. Proxy support for quick integration test
 
 ## How to run
 
@@ -75,7 +73,7 @@ Allowed method: `GET`, `POST`, `PUT`, `PATCH`, `DETELE`
 
 If you want to setup an ajax api url, you can set the template to a json file. The server will look for the json/js file in view folder and send back it as a json object. the data in the view folder sounds not make sense. So if you want put the json/js file in the mock folder, then you can add a `mock::` prefix in the template path, then the server will look for the file in mock folder.
 
-If the mock file is a js file, then it should define as a module function:
+If the mock file is a js file, then it is good to define as a module function:
 
 ```js
 module.exports = function (params, utils) {
