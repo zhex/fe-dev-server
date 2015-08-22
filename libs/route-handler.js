@@ -29,7 +29,13 @@ module.exports = function (config) {
 					isViewFolder = false;
 				}
 				data = getMatchData(match, isViewFolder);
-				res.json(data);
+
+				if (req.query.callback) {
+					res.setHeader('Access-Control-Allow-Origin', '*');
+					res.jsonp(data);
+				} else {
+					res.json(data);
+				}
 			} else {
 				data = getMatchData(match);
 				res.render(match, data);
