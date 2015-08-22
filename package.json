@@ -19,6 +19,8 @@
     "frontend",
     "express",
     "dev server",
+    "mock server",
+    "api",
     "nodemon",
     "jade",
     "ejs",

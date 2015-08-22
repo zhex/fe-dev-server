@@ -4,11 +4,11 @@ FE Dev Server target to help frontend web developers create view template, style
 
 ## Features
 
-1. Various template engines and view data is allowed by just adding a simple data map file.
-2. Simulate urls and then you don't need to change your page urls when you merge your code into backend server.
-3. Mock data can be provided with a simple json/js file.
-4. Auto restart the server if any configuration changed.
-5. Proxy support for quick integration test
+1. Various template engines and embedded page data.
+2. Url simulation
+3. Mock data in file
+4. Websocket
+5. Proxy configuration
 
 ## How to run
 
@@ -166,3 +166,7 @@ proxy: {
 default: 3000
 
 express server port
+
+## Lisence
+
+This projected is licensed under the terms of the MIT license.
