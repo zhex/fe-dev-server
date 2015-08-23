@@ -36,7 +36,7 @@ var server = module.exports = function (config) {
 
 	app.engine('html', cons.ejs);
 	app.engine('jade', cons.jade);
-	app.engine('haml', cons.haml);
+	app.engine('hbs', cons.handlebars);
 
 	app.set('view engine', 'html');
 	app.set('views', config.viewFolder);

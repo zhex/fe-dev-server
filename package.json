@@ -1,6 +1,6 @@
 {
   "name": "fe-dev-server",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "a dev server for frontend work",
   "main": "index.js",
   "bin": {
@@ -31,7 +31,7 @@
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "fs-extra": "^0.23.1",
-    "haml": "^0.4.3",
+    "handlebars": "^3.0.3",
     "jade": "^1.11.0",
     "moment": "^2.10.6",
     "morgan": "^1.6.1",

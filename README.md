@@ -98,7 +98,7 @@ available method:
 ## embedded template engines
 
 - jade
-- haml
+- handlebars
 - ejs
 
 
