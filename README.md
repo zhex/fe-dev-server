@@ -100,6 +100,7 @@ available method:
 - jade
 - handlebars
 - ejs
+- jsp (java)
 
 
 ## Configuration
@@ -166,6 +167,12 @@ proxy: {
 default: 3000
 
 express server port
+
+### javaServerPort
+
+default: 12321
+
+FE server will run a child process for light java server to serve the templates in java, you can change the java server port if it is conflict with your other service.
 
 ## Lisence
 

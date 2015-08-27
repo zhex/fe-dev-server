@@ -39,11 +39,14 @@ module.exports = function (config) {
 				}
 			} else if (utils.contains(['.jsp'], path.extname(match))) {
 				data = getMatchData(match);
+
 				var formData = {
 					template: '/' + match,
 					data: JSON.stringify(data)
 				};
-				request.post('http://localhost:8080/', {form: formData}, function (err, response, body) {
+				var url = 'http://localhost:' + config.javaServerPort + '/';
+
+				request.post(url, {form: formData}, function (err, response, body) {
 					res.writeHead(200, {'Content-Type': 'text/html'});
         			res.write(body);
         			res.end();

@@ -9,7 +9,8 @@ var defaultConfig = {
 	mockFolder: 'mocks',
 	routeFile: 'routes.js',
 	proxy: null,
-	port: 3000
+	port: 3000,
+	javaServerPort: 12321
 };
 
 function extendConfig(config) {
