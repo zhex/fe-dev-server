@@ -6,6 +6,7 @@ var cons = require('consolidate');
 var assign = require('object-assign');
 var proxy = require('proxy-middleware');
 var utils = require('./libs/utils');
+var spawn = require('child_process').spawn;
 
 var defaultConfig = {
 	basePath: path.resolve(__dirname, './example'),
@@ -52,6 +53,30 @@ var server = module.exports = function (config) {
 	app.listen(config.port, function () {
 		console.log('FE Dev Server is listening on port ' + config.port);
 	});
+
+
+	var jarPath = path.resolve(__dirname, './jetty/server.jar');
+	var args = [
+		'-Dviewpath=' + config.viewFolder,
+		'-jar', jarPath
+	];
+
+	var jserver = spawn('java', args, {cwd: __dirname, detached: true});
+
+	jserver.stdout.on('data', function (data) {
+	  console.log('' + data);
+	});
+
+	// jserver.stderr.on("data", function (data) {
+ //    	console.log(data.toString());
+	// });
+
+	jserver.on('error', function(err) {
+        try { process.kill(jserver.pid, 'SIGKILL'); } catch(e) {}
+        console.error(err);
+    });
+
+    jserver.unref();
 
 	return app;
 };

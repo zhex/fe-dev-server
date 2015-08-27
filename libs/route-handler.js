@@ -1,4 +1,5 @@
 var path = require('path');
+var request = require('request');
 var Router = require('./router');
 var DataSet = require('./dataset');
 var utils = require('./utils');
@@ -36,6 +37,17 @@ module.exports = function (config) {
 				} else {
 					res.json(data);
 				}
+			} else if (utils.contains(['.jsp'], path.extname(match))) {
+				data = getMatchData(match);
+				var formData = {
+					template: '/' + match,
+					data: JSON.stringify(data)
+				};
+				request.post('http://localhost:8080/', {form: formData}, function (err, response, body) {
+					res.writeHead(200, {'Content-Type': 'text/html'});
+        			res.write(body);
+        			res.end();
+				});
 			} else {
 				data = getMatchData(match);
 				res.render(match, data);
