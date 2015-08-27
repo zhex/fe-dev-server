@@ -22,6 +22,10 @@ describe('Config Handler', function () {
 		config.mockFolder.should.equal(base + '/mocks');
 	});
 
+	it ('should have default publicFolder', function () {
+		config.publicFolder.should.equal(base + '/public');
+	});
+
 
 	it ('should have default router file', function () {
 		config.routeFile.should.equal(base + '/routes.js');
