@@ -3,7 +3,9 @@
 var path = require('path');
 var fs = require('fs-extra');
 var nodemon = require('nodemon');
+var configHandler = require('../libs/config-handler');
 
+var javaServer;
 
 if (process.argv[2] === 'init') {
 	fs.copy(path.resolve(__dirname, '../example'), '.', function (err) {
@@ -19,13 +21,20 @@ if (process.argv[2] === 'init') {
 		ext: 'js json'
 	});
 
+	var configFile = path.resolve('fds-config.js');
+	var config = configHandler(configFile);
+	javaServer = require('../libs/java-server')(config);
+
 	nodemon.on('restart', function () {
 		console.log('FE Dev Server is restarting ....');
 	});
-
-	nodemon.on('exit', function () {
-
-	});
 }
+
+process.on('SIGINT', function () {
+	try {
+		process.kill(javaServer.pid, 'SIGKILL');
+		console.log('FE Server stopped ....');
+	} catch(e) {}
+});
 
 
