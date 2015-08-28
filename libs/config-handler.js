@@ -22,7 +22,9 @@ function extendConfig(config) {
 	return config;
 }
 
-module.exports = function (configFile) {
-	var config = fs.existsSync(configFile) ? require(configFile) : {};
+module.exports = function (config) {
+	if (typeof config === 'string') {
+		config = fs.existsSync(config) ? require(config) : {};
+	}
 	return extendConfig(config);
 };

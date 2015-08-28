@@ -1,14 +1,14 @@
 var path = require('path');
-// var fs = require('fs');
 var url = require('url');
 var express = require('express');
 var cons = require('consolidate');
-// var assign = require('object-assign');
 var proxy = require('proxy-middleware');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
 
 var server = module.exports = function (config) {
+	config = configHandler(config);
+
 	var app = express();
 
 	app.use(require('morgan')('dev'));
@@ -39,7 +39,6 @@ var server = module.exports = function (config) {
 
 function init() {
 	var configFile = path.resolve('fds-config.js');
-	var config = configHandler(configFile);
 	server(config);
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "fe-dev-server",
   "version": "0.3.1",
-  "description": "a dev server for frontend work",
+  "description": "a dev server for frontend developers",
   "main": "index.js",
   "bin": {
     "fds": "./bin/fds"
@@ -24,7 +24,8 @@
     "nodemon",
     "jade",
     "ejs",
-    "haml"
+    "handlebars",
+    "jsp"
   ],
   "dependencies": {
     "consolidate": "^0.13.1",
