@@ -38,7 +38,7 @@ var server = module.exports = function (config) {
 
 
 function init() {
-	var configFile = path.resolve('fds-config.js');
+	var config = path.resolve('fds-config.js');
 	server(config);
 }
 

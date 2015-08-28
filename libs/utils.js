@@ -16,12 +16,12 @@ exports.contains = function (arr, item) {
 	return arr.indexOf(item) >= 0;
 };
 
-exports.serialize = function (obj) {
+exports.serialize = function (obj, delimiter) {
 	var arr = [];
 	Object.keys(obj).forEach(function (key) {
 		arr.push(key + '=' + obj[key]);
 	});
-	return arr.join('&');
+	return arr.join(delimiter || '&');
 };
 
 exports.moment = require('moment');
