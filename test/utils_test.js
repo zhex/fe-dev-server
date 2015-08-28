@@ -22,6 +22,10 @@ describe('Utils', function () {
 		utils.contains([2, 4], 1).should.be.false;
 	});
 
+	it('serialize', function () {
+		utils.serialize({a:1, b:2}).should.equal('a=1&b=2');
+	});
+
 	it('moment', function () {
 		utils.moment.version.should.be.a.String();
 	});

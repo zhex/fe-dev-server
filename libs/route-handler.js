@@ -44,7 +44,7 @@ module.exports = function (config) {
 					template: '/' + match,
 					data: JSON.stringify(data)
 				};
-				var url = 'http://localhost:' + config.javaServerPort + '/';
+				var url = 'http://localhost:' + config.javaServerPort + '/?' + utils.serialize(req.query);
 
 				request.post(url, {form: formData}, function (err, response, body) {
 					res.writeHead(200, {'Content-Type': 'text/html'});

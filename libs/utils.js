@@ -16,6 +16,14 @@ exports.contains = function (arr, item) {
 	return arr.indexOf(item) >= 0;
 };
 
+exports.serialize = function (obj) {
+	var arr = [];
+	Object.keys(obj).forEach(function (key) {
+		arr.push(key + '=' + obj[key]);
+	});
+	return arr.join('&');
+};
+
 exports.moment = require('moment');
 
 exports.assign = require('object-assign');

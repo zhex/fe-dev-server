@@ -92,15 +92,16 @@ available method:
 - utils.isArray(obj)
 - utils.isFunc(obj)
 - utils.contains(array, item)
+- utils.serialize(obj)
 - utils.assign() - which is [object-assign](https://www.npmjs.com/package/object-assign) library
 - utils.moment() - which is [moment](http://momentjs.com/) library
 
 ## embedded template engines
 
-- jade
-- handlebars
-- ejs
-- jsp (java)
+- [jade](http://jade-lang.com/)
+- [handlebars](http://handlebarsjs.com/)
+- [ejs](http://www.embeddedjs.com/)
+- [jsp](https://en.wikipedia.org/wiki/JavaServer_Pages) (java)
 
 
 ## Configuration
