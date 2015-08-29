@@ -4,8 +4,7 @@ var path = require('path');
 var fs = require('fs-extra');
 var nodemon = require('nodemon');
 var configHandler = require('../libs/config-handler');
-
-var javaServer;
+var JavaServer = require('../libs/java-server');
 
 if (process.argv[2] === 'init') {
 	fs.copy(path.resolve(__dirname, '../example'), '.', function (err) {
@@ -16,25 +15,25 @@ if (process.argv[2] === 'init') {
 		console.log('Project inited.');
 	});
 } else {
+	var configFile = path.resolve('fds-config.js');
+	var config = configHandler(configFile);
+
 	nodemon({
 		script: path.resolve(__dirname, '../index.js'),
+		watch: [
+			config.mockFolder,
+			config.routeFile
+		],
 		ext: 'js json'
 	});
 
-	var configFile = path.resolve('fds-config.js');
-	var config = configHandler(configFile);
-	javaServer = require('../libs/java-server')(config);
+	JavaServer.create(config);
 
 	nodemon.on('restart', function () {
 		console.log('FE Dev Server is restarting ....');
 	});
 }
 
-process.on('SIGINT', function () {
-	try {
-		process.kill(javaServer.pid, 'SIGKILL');
-		console.log('FE Server stopped ....');
-	} catch(e) {}
-});
+process.on('exit', JavaServer.close);
 
 

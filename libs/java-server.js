@@ -1,7 +1,9 @@
 var path = require('path');
 var spawn = require('child_process').spawn;
 
-module.exports = function (config) {
+var instance;
+
+function create(config) {
 	var jarPath = path.resolve(__dirname, '../jetty/server.jar');
 	var args = [
 		'-Dviewpath=' + config.viewFolder,
@@ -9,20 +11,26 @@ module.exports = function (config) {
 		'-jar', jarPath
 	];
 
-	var jserver = spawn('java', args, {cwd: __dirname, detached: true});
+	instance = spawn('java', args, {cwd: __dirname, detached: true});
+	instance.unref();
+}
 
-	// jserver.stdout.on('data', function (data) {
-	//   console.log('' + data);
-	// });
+function close() {
+	try {
+		process.kill(instance.pid, 'SIGKILL');
+		console.log('FE Server stopped ....');
+	} catch(e) {}
+}
 
-	// jserver.stderr.on("data", function (data) {
- //    	console.log(data.toString());
-	// });
+function restart(config) {
+	close();
+	setTimeout(function () {
+		create(config);
+	}, 50);
+}
 
-	jserver.on('error', function(err) {
-        try { process.kill(jserver.pid, 'SIGKILL'); } catch(e) {}
-        console.error(err);
-    });
-
-    return jserver;
+module.exports = {
+	create: create,
+	close: close,
+	restart: restart
 };
