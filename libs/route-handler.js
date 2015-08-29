@@ -41,13 +41,13 @@ module.exports = function (config) {
 				data = getMatchData(match);
 
 				var formData = {
-					template: '/' + match,
+					template: match.slice(0, 1) === '/' ? match : '/' + match,
 					data: JSON.stringify(data)
 				};
 				var url = 'http://localhost:' + config.javaServerPort + '/?' + utils.serialize(req.query);
 
 				request.post(url, {form: formData}, function (err, response, body) {
-					res.writeHead(200, {'Content-Type': 'text/html'});
+					res.writeHead(response.statusCode, {'Content-Type': 'text/html'});
         			res.write(body);
         			res.end();
 				});
