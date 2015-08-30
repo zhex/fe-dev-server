@@ -1,6 +1,6 @@
 {
   "name": "fe-dev-server",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "a dev server for frontend developers",
   "main": "index.js",
   "bin": {
@@ -25,7 +25,8 @@
     "jade",
     "ejs",
     "handlebars",
-    "jsp"
+    "jsp",
+    "velocity"
   ],
   "dependencies": {
     "consolidate": "^0.13.1",

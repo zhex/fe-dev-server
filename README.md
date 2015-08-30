@@ -62,7 +62,8 @@ module.exports = {
 	'/test':         		'test.html',
 	'GET::/books':   		'books.jade',
 	'POST::/api/books':  	'mock::books.json',
-	'GET::/api/category':  	'mock::category.js'
+	'GET::/api/category':  	'mock::category.js',
+	'/jsp-page':			'books.jsp'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
@@ -102,6 +103,7 @@ available method:
 - [handlebars](http://handlebarsjs.com/)
 - [ejs](http://www.embeddedjs.com/)
 - [jsp](https://en.wikipedia.org/wiki/JavaServer_Pages) (java)
+- [velocity](http://velocity.apache.org/) (java)
 
 
 ## Configuration

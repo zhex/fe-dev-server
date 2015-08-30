@@ -33,18 +33,19 @@ module.exports = function (config) {
 
 				if (req.query.callback) {
 					res.setHeader('Access-Control-Allow-Origin', '*');
+					res.setHeader('Access-Control-Allow-Methods', '*');
 					res.jsonp(data);
 				} else {
 					res.json(data);
 				}
-			} else if (utils.contains(['.jsp'], path.extname(match))) {
+			} else if (utils.contains(['.jsp', '.vm'], path.extname(match))) {
 				data = getMatchData(match);
 
 				var formData = {
 					template: match.slice(0, 1) === '/' ? match : '/' + match,
 					data: JSON.stringify(data)
 				};
-				var url = 'http://localhost:' + config.javaServerPort + '/?' + utils.serialize(req.query);
+				var url = 'http://localhost:' + config.javaServerPort + '/render?' + utils.serialize(req.query);
 
 				request.post(url, {form: formData}, function (err, response, body) {
 					res.writeHead(response.statusCode, {'Content-Type': 'text/html'});
