@@ -30,6 +30,7 @@ Router.prototype.search = function (url, method) {
 		re = pathRegexp(r.route);
 		if (re.exec(url) && r.method.toLowerCase() === method.toLowerCase()) {
 			match = r.file;
+			if (match.slice(0, 1) === '/') match = match.slice(1);
 			return;
 		}
 	});
