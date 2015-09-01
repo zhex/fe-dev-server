@@ -24,11 +24,6 @@ describe('DataSet', function () {
 		data.name.should.equal('joey');
 	});
 
-	it('should return a function for exist js function file', function () {
-		var data = ds.get('js_func.html');
-		data.should.be.a.Function();
-	});
-
 	it('should return a json object for json file', function () {
 		var data = ds.get('obj.html');
 		data.should.have.property('name');

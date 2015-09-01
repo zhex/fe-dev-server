@@ -27,7 +27,13 @@ var server = module.exports = function (config) {
 		});
 	}
 
-	app.all('/:pattern(*)', require('./libs/route-handler')(config));
+	app.all(
+		'/:pattern(*)',
+		require('./libs/init-handler')(config),
+		require('./libs/data-handler'),
+		require('./libs/java-handler'),
+		require('./libs/view-handler')
+	);
 
 	app.listen(config.port, function () {
 		console.log('FE Dev Server is listening on port ' + config.port);
