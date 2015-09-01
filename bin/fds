@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs-extra');
 var nodemon = require('nodemon');
 var configHandler = require('../libs/config-handler');
+var utils = require('../libs/utils');
 var JavaServer = require('../libs/java-server');
 
 if (process.argv[2] === 'init') {
@@ -22,15 +23,20 @@ if (process.argv[2] === 'init') {
 		script: path.resolve(__dirname, '../index.js'),
 		watch: [
 			config.mockFolder,
-			config.routeFile
+			config.routeFile,
+			configFile
 		],
 		ext: 'js json'
 	});
 
 	JavaServer.create(config);
 
-	nodemon.on('restart', function () {
+	nodemon.on('restart', function (files) {
 		console.log('FE Dev Server is restarting ....');
+		if (utils.contains(files, configFile)) {
+			config = configHandler(configFile, true);
+			JavaServer.restart(config);
+		}
 	});
 }
 

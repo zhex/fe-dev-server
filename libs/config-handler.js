@@ -22,8 +22,9 @@ function extendConfig(config) {
 	return config;
 }
 
-module.exports = function (config) {
+module.exports = function (config, force) {
 	if (typeof config === 'string') {
+		if (force) delete require.cache[config];
 		config = fs.existsSync(config) ? require(config) : {};
 	}
 	return extendConfig(config);

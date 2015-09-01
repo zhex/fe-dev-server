@@ -26,7 +26,7 @@ function restart(config) {
 	close();
 	setTimeout(function () {
 		create(config);
-	}, 50);
+	}, 30);
 }
 
 module.exports = {
