@@ -7,10 +7,9 @@ FE Dev Server target to help frontend web developers create view template, style
 1. Various template engines and embedded page data.
 2. Url simulation
 3. Mock data in file
-4. Websocket
-5. Proxy configuration
+4. Proxy configuration
 
-## How to run
+## Quick start
 
 Install it as a command line tool with the following step:
 
@@ -181,8 +180,8 @@ FE server will run a child process for light java server to serve the templates 
 
 default: { route: '/', browser: ['google chrome'] }
 
-Browser setting allow you to open dev site automatically on server started. it will open google chrome by default. You can set it to `false` to disable it.
+Browser setting allow you to open dev site automatically on server started. it will open google chrome by default. You can set it to `false` to disable the feature.
 
 ## Lisence
 
-This projected is licensed under the terms of the MIT license.
+This project is licensed under the terms of the MIT license.
