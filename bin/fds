@@ -3,9 +3,12 @@
 var path = require('path');
 var fs = require('fs-extra');
 var nodemon = require('nodemon');
+var open = require('opn');
 var configHandler = require('../libs/config-handler');
 var utils = require('../libs/utils');
 var JavaServer = require('../libs/java-server');
+
+var opened = false;
 
 if (process.argv[2] === 'init') {
 	fs.copy(path.resolve(__dirname, '../example'), '.', function (err) {
@@ -30,6 +33,16 @@ if (process.argv[2] === 'init') {
 	});
 
 	JavaServer.create(config);
+
+	nodemon.on('start', function () {
+		if (!opened && config.open) {
+			setTimeout(function () {
+				var url = 'http://localhost:' + config.port + (config.open.route || '/');
+				open(url, {app: config.open.browser});
+			}, 500);
+		}
+		opened = true;
+	});
 
 	nodemon.on('restart', function (files) {
 		console.log('FE Dev Server is restarting ....');

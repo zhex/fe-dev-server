@@ -10,7 +10,11 @@ var defaultConfig = {
 	routeFile: 'routes.js',
 	proxy: null,
 	port: 3000,
-	javaServerPort: 12321
+	javaServerPort: 12321,
+	open: {
+		route: '/',
+		browser: ['google chrome']
+	}
 };
 
 function extendConfig(config) {

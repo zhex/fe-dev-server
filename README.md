@@ -150,7 +150,7 @@ Where you can put your image, style and js files here. This folder is set by `ex
 
 default: 'routes.js'
 
-routes mapping file
+Routes mapping file
 
 
 ### proxy
@@ -169,13 +169,19 @@ proxy: {
 
 default: 3000
 
-express server port
+Express server port
 
 ### javaServerPort
 
 default: 12321
 
 FE server will run a child process for light java server to serve the templates in java, you can change the java server port if it is conflict with your other service.
+
+### open
+
+default: { route: '/', browser: ['google chrome'] }
+
+Browser setting allow you to open dev site automatically on server started. it will open google chrome by default. You can set it to `false` to disable it.
 
 ## Lisence
 
