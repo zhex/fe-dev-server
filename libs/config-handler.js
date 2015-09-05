@@ -19,6 +19,7 @@ var defaultConfig = {
 
 function extendConfig(config) {
 	config = assign({}, defaultConfig, config);
+	config.basePath = path.resolve(config.basePath);
 	config.viewFolder = path.resolve(config.basePath, config.viewFolder);
 	config.mockFolder = path.resolve(config.basePath, config.mockFolder);
 	config.publicFolder = path.resolve(config.basePath, config.publicFolder);

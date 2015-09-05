@@ -12,7 +12,7 @@ describe('Config Handler', function () {
 		});
 
 		it ('should have extended base path', function () {
-			config.basePath.should.equal('.');
+			config.basePath.should.equal(base);
 		});
 
 		it ('should have default viewFolder', function () {
@@ -41,7 +41,7 @@ describe('Config Handler', function () {
 		});
 
 		it ('should have extended base path', function () {
-			config.basePath.should.equal('.');
+			config.basePath.should.equal(base);
 		});
 
 		it ('should have default viewFolder', function () {
