@@ -1,4 +1,4 @@
-var Router = require('./router');
+var Router = require('../libs/router');
 var cons = require('consolidate');
 var path = require('path');
 var fs = require('fs');
@@ -12,12 +12,12 @@ module.exports = function (config) {
 
 		try {
 			if (!match)
-				throw new Error('No route defined');
+				throw new Error('No route defined in: ' + config.routeFile);
 
 			var  filePath= match.searchType === 'mock' ? config.mockFolder : config.viewFolder;
 			file = path.resolve(filePath, match.file);
 			if (!fs.existsSync(file))
-				throw new Error('No route file found');
+				throw new Error('Template file: ' + file + ' is not found');
 
 			req._fds = {
 				route: route,

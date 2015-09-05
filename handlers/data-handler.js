@@ -1,8 +1,6 @@
 var path = require('path');
-var utils = require('./utils');
-var DataSet = require('./dataset');
-
-var SYMBOL_MOCK = 'mock::';
+var utils = require('../libs/utils');
+var DataSet = require('../libs/dataset');
 
 module.exports = function (req, res, next) {
 	var config = req._fds.config;

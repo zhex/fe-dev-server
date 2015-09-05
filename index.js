@@ -5,11 +5,8 @@ var cons = require('consolidate');
 var proxy = require('proxy-middleware');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
-var Handlebars = require('handlebars');
 
-Handlebars.registerHelper('json', function(context) {
-    return JSON.stringify(context);
-});
+require('./libs/handlebars-helper');
 
 var server = module.exports = function (config) {
 	config = configHandler(config);
@@ -34,10 +31,10 @@ var server = module.exports = function (config) {
 
 	app.all(
 		'/:pattern(*)',
-		require('./libs/init-handler')(config),
-		require('./libs/data-handler'),
-		require('./libs/java-handler'),
-		require('./libs/view-handler')
+		require('./handlers/init-handler')(config),
+		require('./handlers/data-handler'),
+		require('./handlers/java-handler'),
+		require('./handlers/view-handler')
 	);
 
 	app.listen(config.port, function () {

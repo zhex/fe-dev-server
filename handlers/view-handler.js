@@ -1,4 +1,4 @@
-var DataSet = require('./dataset');
+var DataSet = require('../libs/dataset');
 
 module.exports = function (req, res) {
 	var config = req._fds.config;
