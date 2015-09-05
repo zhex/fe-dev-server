@@ -5,6 +5,11 @@ var cons = require('consolidate');
 var proxy = require('proxy-middleware');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
+var Handlebars = require('handlebars');
+
+Handlebars.registerHelper('json', function(context) {
+    return JSON.stringify(context);
+});
 
 var server = module.exports = function (config) {
 	config = configHandler(config);

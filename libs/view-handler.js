@@ -5,7 +5,7 @@ module.exports = function (req, res) {
 	var match = req._fds.match;
 
 	var ds = new DataSet(config.mockFolder);
-	var data = ds.get(match, req.query);
+	var data = ds.get(match.file, req.query);
 
-	res.render(match, data);
+	res.render(match.file, data);
 };

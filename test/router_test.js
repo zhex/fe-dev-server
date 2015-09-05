@@ -17,8 +17,8 @@ describe('Router', function () {
 	});
 
 	it('should return the url path for given method and route', function () {
-		router.search('/', 'get').should.equal('index.html');
-		router.search('/test', 'get').should.equal('test.html');
-		router.search('/test', 'post').should.equal('test_post.html');
+		router.search('/', 'get').file.should.equal('index.html');
+		router.search('/test', 'get').file.should.equal('test.html');
+		router.search('/test', 'post').file.should.equal('test_post.html');
 	});
 });

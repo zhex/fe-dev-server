@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>FDS - Error Report</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+			font-family: Verdana, Arial, sans-serif
+			color: #333;
+		}
+
+		header {
+			padding: 30px 0;
+			margin-bottom: 40px;
+			border-bottom: 1px solid #ccc;
+		}
+
+		h1 {
+			margin: 0;
+		}
+
+		h1 span {
+			display: inline-block;
+			background: #333;
+			padding: 5px 10px;
+			border-radius: 5px;
+			color: #fff;
+		}
+
+		.container {
+			width: 700px;
+			margin: 0 auto;
+		}
+
+		table {
+			width: 100%;
+			border: 1px solid #ccc;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		th, td {
+			border: 1px solid #ccc;
+			padding: 10px 20px;
+		}
+
+		th {
+			background: #eee;
+			text-align: right;
+			width: 110px;
+			font-weight: bolder;
+		}
+
+		.symbol {
+			display: inline-block;
+			padding: 3px 10px;
+			background: green;
+			border-radius: 5px;
+			color: #fff;
+			margin-right: 10px;
+		}
+
+		.error th,
+		.error td {
+			color: red;
+			background: #FADEE1;
+			border-color: red;
+		}
+
+		.error .symbol {
+			background: red;
+		}
+
+		h2.error {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+
+<header>
+	<div class="container">
+		<h1><span>FDS</span> Error Report</h1>
+	</div>
+</header>
+
+<div class="container">
+	<h2 class="error">{{error.message}}</h2>
+
+	<table>
+		{{#if match}}
+		<tr>
+		{{else}}
+		<tr class="error">
+		{{/if}}
+			<th>Route</th>
+			<td><span class="symbol">{{method}}</span> {{route}}</td>
+		</tr>
+		{{#if match}}
+		<tr class="error">
+			<th>Route File</th>
+			<td><span class="symbol">{{match.searchType}}</span> {{match.file}}</td>
+		</tr>
+		{{/if}}
+		<tr>
+			<th>Query</th>
+			<td>{{json query}}</td>
+		</tr>
+	</table>
+
+	<h4>Configuration</h4>
+	<table>
+		<tr>
+			<th>Base Path</th>
+			<td>{{config.basePath}}</td>
+		</tr>
+		<tr>
+			<th>View Directory</th>
+			<td>{{config.viewFolder}}</td>
+		</tr>
+		<tr>
+			<th>Mock Directory</th>
+			<td>{{config.mockFolder}}</td>
+		</tr>
+		<tr>
+			<th>Public Directory</th>
+			<td>{{config.publicFolder}}</td>
+		</tr>
+		<tr>
+			<th>Route File</th>
+			<td>{{config.routeFile}}</td>
+		</tr>
+		<tr>
+			<th>Server Port</th>
+			<td>{{config.port}}</td>
+		</tr>
+		<tr>
+			<th>Java Server Port</th>
+			<td>{{config.javaServerPort}}</td>
+		</tr>
+		<tr>
+			<th>Proxy</th>
+			<td>{{json config.proxy}}</td>
+		</tr>
+		<tr>
+			<th>Open</th>
+			<td>{{json config.open}}</td>
+		</tr>
+	</table>
+</div>
+
+
+</body>
+</html>
+
+

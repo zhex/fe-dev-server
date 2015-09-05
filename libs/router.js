@@ -1,6 +1,8 @@
 var fs = require('fs');
 var pathRegexp = require('path-to-regexp');
 
+var SYMBOL_MOCK = 'mock::';
+
 function Router(routeFile) {
 	this.routes = [];
 	this.loadRoutes(routeFile);
@@ -26,6 +28,7 @@ Router.prototype.loadRoutes = function (routeFile) {
 
 Router.prototype.search = function (url, method) {
 	var match = null, re;
+
 	this.routes.some(function (r) {
 		re = pathRegexp(r.route);
 		if (re.exec(url) && r.method.toLowerCase() === method.toLowerCase()) {
@@ -34,6 +37,19 @@ Router.prototype.search = function (url, method) {
 			return;
 		}
 	});
+
+	if (match) {
+		var type = 'view';
+		if (match.indexOf(SYMBOL_MOCK) >= 0) {
+			match = match.replace(SYMBOL_MOCK, '');
+			type = 'mock';
+		}
+		return {
+			file: match,
+			searchType: type
+		};
+	}
+
 	return match;
 };
 
