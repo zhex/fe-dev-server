@@ -29,6 +29,7 @@
     "velocity"
   ],
   "dependencies": {
+    "colors": "^1.1.2",
     "consolidate": "^0.13.1",
     "ejs": "^2.3.3",
     "express": "^4.13.3",

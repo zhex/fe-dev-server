@@ -2,6 +2,7 @@ var path = require('path');
 var url = require('url');
 var express = require('express');
 var cons = require('consolidate');
+var colors = require('colors');
 var proxy = require('proxy-middleware');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
@@ -38,7 +39,7 @@ var server = module.exports = function (config) {
 	);
 
 	app.listen(config.port, function () {
-		console.log('FE Dev Server is listening on port ' + config.port);
+		console.log('FE Dev Server is listening on port '.green + config.port.toString().green);
 	});
 
 	return app;

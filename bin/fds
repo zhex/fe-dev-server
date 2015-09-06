@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs-extra');
 var nodemon = require('nodemon');
 var open = require('opn');
+var color = require('colors');
 var configHandler = require('../libs/config-handler');
 var utils = require('../libs/utils');
 var JavaServer = require('../libs/java-server');
@@ -16,11 +17,22 @@ if (process.argv[2] === 'init') {
 			console.error(err);
 			return;
 		}
-		console.log('Project inited.');
+		console.log('Project inited.'.green);
 	});
 } else {
 	var configFile = path.resolve('fds-config.js');
+
+	if (!fs.existsSync(configFile)) {
+		console.log('[Error] '.red + 'fds-config.js'.magenta + ' is not found in current folder.');
+		return;
+	}
+
 	var config = configHandler(configFile);
+
+	if (!fs.existsSync(config.routeFile)) {
+		console.log('[Error]'.red + ' Route file is not found.');
+		return;
+	}
 
 	nodemon({
 		script: path.resolve(__dirname, '../index.js'),
@@ -45,7 +57,7 @@ if (process.argv[2] === 'init') {
 	});
 
 	nodemon.on('restart', function (files) {
-		console.log('FE Dev Server is restarting ....');
+		console.log('FE Dev Server is restarting ....'.cyan);
 		if (utils.contains(files, configFile)) {
 			config = configHandler(configFile, true);
 			JavaServer.restart(config);
