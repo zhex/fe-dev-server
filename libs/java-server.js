@@ -17,8 +17,10 @@ function create(config) {
 
 function close() {
 	try {
-		process.kill(instance.pid, 'SIGKILL');
-		console.log('FE Server stopped ....');
+		if (instance) {
+			process.kill(instance.pid, 'SIGKILL');
+			console.log('FE Server stopped ....');
+		}
 	} catch(e) {}
 }
 

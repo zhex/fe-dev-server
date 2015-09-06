@@ -10,6 +10,7 @@ var defaultConfig = {
 	routeFile: 'routes.js',
 	proxy: null,
 	port: 3000,
+	enableJava: true,
 	javaServerPort: 12321,
 	open: {
 		route: '/',

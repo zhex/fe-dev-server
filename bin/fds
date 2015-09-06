@@ -44,7 +44,7 @@ if (process.argv[2] === 'init') {
 		ext: 'js json'
 	});
 
-	JavaServer.create(config);
+	if (config.enableJava) JavaServer.create(config);
 
 	nodemon.on('start', function () {
 		if (!opened && config.open) {
@@ -58,9 +58,11 @@ if (process.argv[2] === 'init') {
 
 	nodemon.on('restart', function (files) {
 		console.log('FE Dev Server is restarting ....'.cyan);
-		if (utils.contains(files, configFile)) {
+		if (config.enableJava && utils.contains(files, configFile)) {
 			config = configHandler(configFile, true);
 			JavaServer.restart(config);
+		} else {
+			JavaServer.close();
 		}
 	});
 }

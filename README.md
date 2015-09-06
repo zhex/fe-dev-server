@@ -170,6 +170,12 @@ default: 3000
 
 Express server port
 
+### enableJava
+
+default: true
+
+Sometimes you don't need to support java templates, you can turn it off with this property to `false`.
+
 ### javaServerPort
 
 default: 12321
