@@ -35,7 +35,9 @@ var server = module.exports = function (config) {
 		require('./handlers/init-handler')(config),
 		require('./handlers/data-handler'),
 		require('./handlers/java-handler'),
-		require('./handlers/view-handler')
+		require('./handlers/view-handler'),
+		require('./handlers/not-found-handler'),
+		require('./handlers/error-handler')
 	);
 
 	app.listen(config.port, function () {

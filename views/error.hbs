@@ -92,20 +92,14 @@
 	<h2 class="error">{{error.message}}</h2>
 
 	<table>
-		{{#if match}}
 		<tr>
-		{{else}}
-		<tr class="error">
-		{{/if}}
 			<th>Route</th>
 			<td><span class="symbol">{{method}}</span> {{route}}</td>
 		</tr>
-		{{#if match}}
-		<tr class="error">
+		<tr>
 			<th>Template File</th>
 			<td><span class="symbol">{{match.searchType}}</span> {{match.file}}</td>
 		</tr>
-		{{/if}}
 		<tr>
 			<th>Query</th>
 			<td>{{json query}}</td>
