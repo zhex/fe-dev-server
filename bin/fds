@@ -8,19 +8,42 @@ var color = require('colors');
 var configHandler = require('../libs/config-handler');
 var utils = require('../libs/utils');
 var JavaServer = require('../libs/java-server');
+var program = require('commander');
 
-var opened = false;
 
-if (process.argv[2] === 'init') {
+program
+	.version(require('../package.json').version)
+	.usage('<command> [options]')
+	.option('-o --open', 'open site in browser after server startup');
+
+
+program
+	.command('init')
+	.description('initial the project')
+	.action(init);
+
+program
+	.command('')
+	.description('startup server');
+
+program.parse(process.argv);
+
+if (!program.args.length) server();
+
+
+function init() {
 	fs.copy(path.resolve(__dirname, '../example'), '.', function (err) {
 		if (err) {
-			console.error(err);
+			console.error(err.red);
 			return;
 		}
 		console.log('Project inited.'.green);
 	});
-} else {
+}
+
+function server() {
 	var configFile = path.resolve('fds-config.js');
+	var opened = false;
 
 	if (!fs.existsSync(configFile)) {
 		console.log('[Error] '.red + 'fds-config.js'.magenta + ' is not found in current folder.');
@@ -47,7 +70,7 @@ if (process.argv[2] === 'init') {
 	if (config.enableJava) JavaServer.create(config);
 
 	nodemon.on('start', function () {
-		if (!opened && config.open) {
+		if (!opened && program.open) {
 			setTimeout(function () {
 				var url = 'http://localhost:' + config.port + (config.open.route || '/');
 				open(url, {app: config.open.browser});
@@ -65,8 +88,7 @@ if (process.argv[2] === 'init') {
 			JavaServer.close();
 		}
 	});
+
+	process.on('exit', JavaServer.close);
 }
-
-process.on('exit', JavaServer.close);
-
 

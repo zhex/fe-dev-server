@@ -30,6 +30,7 @@
   ],
   "dependencies": {
     "colors": "^1.1.2",
+    "commander": "^2.8.1",
     "consolidate": "^0.13.1",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
