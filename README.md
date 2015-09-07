@@ -186,7 +186,11 @@ FE server will run a child process for light java server to serve the templates 
 
 default: { route: '/', browser: ['google chrome'] }
 
-Browser setting allow you to open dev site automatically on server started. it will open google chrome by default. You can set it to `false` to disable the feature.
+Browser setting allow you to open dev site automatically on server started with `-o` option in cli. It will open google chrome by default. 
+
+```
+$ fds -o
+```
 
 ## Lisence
 
