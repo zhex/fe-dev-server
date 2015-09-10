@@ -25,6 +25,8 @@ module.exports = function (req, res, next) {
 	var url = 'http://localhost:' + config.javaServerPort + '/render?' + utils.serialize(req.query);
 
 	request.post(url, {form: formData}, function (err, response, body) {
+		if (err) return next(err);
+
 		res.writeHead(response.statusCode, {'Content-Type': 'text/html'});
 		res.write(body);
 		res.end();

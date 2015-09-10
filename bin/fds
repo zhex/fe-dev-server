@@ -74,18 +74,20 @@ function server() {
 			setTimeout(function () {
 				var url = 'http://localhost:' + config.port + (config.open.route || '/');
 				open(url, {app: config.open.browser});
-			}, 500);
+			}, 1200);
 		}
 		opened = true;
 	});
 
 	nodemon.on('restart', function (files) {
 		console.log('FE Dev Server is restarting ....'.cyan);
-		if (config.enableJava && utils.contains(files, configFile)) {
+		if (utils.contains(files, configFile)) {
 			config = configHandler(configFile, true);
-			JavaServer.restart(config);
-		} else {
-			JavaServer.close();
+
+			if (config.enableJava)
+				JavaServer.restart(config);
+			else
+				JavaServer.close();
 		}
 	});
 
