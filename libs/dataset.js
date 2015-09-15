@@ -7,15 +7,25 @@ function DataSet(path) {
 }
 
 DataSet.prototype.get = function (file, params) {
+	var data = {};
+	var dataExt = null;
+
 	var ext = path.extname(file);
 	var regexp = new RegExp('\\' + ext + '$');
 
 	var dataFile = file.replace(regexp, '');
-	var f = path.resolve(this.path, dataFile);
+	dataFile = path.resolve(this.path, dataFile);
 
-	var data = (fs.existsSync(f + '.js')
-		|| fs.existsSync(f + '.json'))
-		? require(f) : {};
+	if (fs.existsSync(dataFile + '.js'))
+		dataExt = '.js';
+	else if (fs.existsSync(f + '.json'))
+		dataExt = '.dataExt';
+
+	if (dataExt) {
+		dataFile += dataExt;
+		delete require.cache[dataFile];
+		data = require(dataFile);
+	}
 
 	if (utils.isFunc(data)) data = data(params, utils);
 

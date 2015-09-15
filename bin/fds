@@ -60,7 +60,6 @@ function server() {
 	nodemon({
 		script: path.resolve(__dirname, '../index.js'),
 		watch: [
-			config.mockFolder,
 			config.routeFile,
 			configFile
 		],
