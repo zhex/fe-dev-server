@@ -6,6 +6,7 @@ var colors = require('colors');
 var proxy = require('proxy-middleware');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
+var JavaServer = require('./libs/java-server');
 
 require('./libs/handlebars-helper');
 
@@ -39,6 +40,9 @@ var server = module.exports = function (config) {
 		require('./handlers/not-found-handler'),
 		require('./handlers/error-handler')
 	);
+
+	app.config = config;
+	app.JavaServer = JavaServer;
 
 	app.listen(config.port, function () {
 		console.log('FE Dev Server is listening on port '.green + config.port.toString().green);
