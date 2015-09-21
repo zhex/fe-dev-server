@@ -43,10 +43,17 @@ Also, it can be integrated into your own project as a node module.
 ```js
 var fds = require('fe-dev-server');
 
-fds({
+var app = fds({
 	basePath: __dirname,
 	mockFolder: 'data',
 	port: 8001	
+});
+
+app.JavaServer.create(app.config);
+
+process.on('SIGINIT', function () {
+	app.JavaServer.close();
+	process.exit();
 });
 ```
 
