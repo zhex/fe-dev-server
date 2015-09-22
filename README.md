@@ -83,13 +83,14 @@ If you want to setup an ajax api url, you can set the template to a json file. T
 If the mock file is a js file, then it is good to define as a module function:
 
 ```js
-module.exports = function (params, utils) {
+module.exports = function (data, utils) {
 	return {
-		name: params.name || 'hello world'
+		id: data.params.id,
+		name: data.query.name || 'hello world'
 	};
 };
 ```
-The `params` is the query data from request url, so you can easily test your page with different api return.
+The `data.params` is the match variable collection in the particular route; The `data.query` is the query data from request url, so you can easily test your page with different api return.
 
 `utils` provide some easy to use method to handle the data.
 

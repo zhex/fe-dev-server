@@ -16,7 +16,11 @@ module.exports = function (req, res, next) {
 	}
 
 	var ds = new DataSet(config.mockFolder);
-	var data = ds.get(match.file, req.query);
+	var data = {
+		params: match.params,
+		query: req.query
+	};
+	data = ds.get(match.file, req.query);
 
 	var formData = {
 		template: match.file.slice(0, 1) === '/' ? match.file : '/' + match.file,

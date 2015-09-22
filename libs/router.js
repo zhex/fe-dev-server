@@ -27,13 +27,20 @@ Router.prototype.loadRoutes = function (routeFile) {
 };
 
 Router.prototype.search = function (url, method) {
-	var match = null, re;
+	var match = null, re, params = {};
 
 	this.routes.some(function (r) {
 		re = pathRegexp(r.route);
-		if (re.exec(url) && r.method.toLowerCase() === method.toLowerCase()) {
+		var result = re.exec(url);
+
+		if (result && r.method.toLowerCase() === method.toLowerCase()) {
 			match = r.file;
 			if (match.slice(0, 1) === '/') match = match.slice(1);
+			var keys = r.route.match(/:\w+/g);
+			result.shift();
+			keys.forEach(function (key, idx) {
+				params[key.slice(1)] = result[idx];
+			});
 			return;
 		}
 	});
@@ -46,7 +53,8 @@ Router.prototype.search = function (url, method) {
 		}
 		return {
 			file: match,
-			searchType: type
+			searchType: type,
+			params: params
 		};
 	}
 
