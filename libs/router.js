@@ -46,7 +46,7 @@ Router.prototype.search = function (url, method) {
 					params[key.slice(1)] = result[idx];
 				});
 			}
-			return;
+			return true;
 		}
 	});
 
