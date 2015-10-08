@@ -12,7 +12,7 @@ var program = require('commander');
 
 
 program
-	.version(require('../package.json').version)
+	.version(require('../package.json').version, '-v --version')
 	.usage('<command> [options]')
 	.option('-o --open', 'open site in browser after server startup');
 
