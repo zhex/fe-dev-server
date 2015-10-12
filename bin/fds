@@ -90,6 +90,10 @@ function server() {
 		}
 	});
 
-	process.on('exit', JavaServer.close);
+	// catch ctrl+c
+	process.on('SIGINT', function () {
+		JavaServer.close();
+		process.exit();
+	});
 }
 

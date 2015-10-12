@@ -51,7 +51,7 @@ var app = fds({
 
 app.JavaServer.create(app.config);
 
-process.on('SIGINIT', function () {
+process.on('SIGINT', function () {
 	app.JavaServer.close();
 	process.exit();
 });
