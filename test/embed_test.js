@@ -5,7 +5,7 @@ describe('Embed Server', function () {
 	var server;
 
 	before(function () {
-		server = fds({});
+		server = fds({enableJava: false});
 	});
 
 	it('should return a server object', function () {

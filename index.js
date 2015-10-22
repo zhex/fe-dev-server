@@ -10,6 +10,8 @@ var JavaServer = require('./libs/java-server');
 
 require('./libs/handlebars-helper');
 
+var isMain = false;
+
 var server = module.exports = function (config) {
 	config = configHandler(config);
 
@@ -41,6 +43,10 @@ var server = module.exports = function (config) {
 		require('./handlers/error-handler')
 	);
 
+	if (!isMain && config.enableJava) {
+		JavaServer.create(config);
+	}
+
 	app.config = config;
 	app.JavaServer = JavaServer;
 
@@ -58,5 +64,6 @@ function init() {
 }
 
 if (require.main === module) {
+	isMain = true;
 	init();
 }

@@ -73,13 +73,14 @@ function server() {
 			setTimeout(function () {
 				var url = 'http://localhost:' + config.port + (config.open.route || '/');
 				open(url, {app: config.open.browser});
+				opened = true;
 			}, 1200);
 		}
-		opened = true;
 	});
 
 	nodemon.on('restart', function (files) {
 		console.log('FE Dev Server is restarting ....'.cyan);
+		
 		if (utils.contains(files, configFile)) {
 			config = configHandler(configFile, true);
 
@@ -90,9 +91,8 @@ function server() {
 		}
 	});
 
-	// catch ctrl+c
 	process.on('SIGINT', function () {
-		JavaServer.close();
+		console.log('FE Dev Server is stopped.'.green);
 		process.exit();
 	});
 }
