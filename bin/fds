@@ -9,6 +9,7 @@ var configHandler = require('../libs/config-handler');
 var utils = require('../libs/utils');
 var JavaServer = require('../libs/java-server');
 var program = require('commander');
+var findup = require('findup-sync');
 
 
 program
@@ -42,11 +43,11 @@ function init() {
 }
 
 function server() {
-	var configFile = path.resolve('fds-config.js');
+	var configFile = findup('fds-config.js');
 	var opened = false;
 
-	if (!fs.existsSync(configFile)) {
-		console.log('[Error] '.red + 'fds-config.js'.magenta + ' is not found in current folder.');
+	if (!configFile) {
+		console.log('[Error] '.red + configFileName.magenta + ' is not found in path.');
 		return;
 	}
 
@@ -80,7 +81,7 @@ function server() {
 
 	nodemon.on('restart', function (files) {
 		console.log('FE Dev Server is restarting ....'.cyan);
-		
+
 		if (utils.contains(files, configFile)) {
 			config = configHandler(configFile, true);
 
