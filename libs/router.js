@@ -54,6 +54,7 @@ Router.prototype.search = function (url, method) {
 		var type = 'view';
 		if (match.indexOf(SYMBOL_MOCK) >= 0) {
 			match = match.replace(SYMBOL_MOCK, '');
+			if (match.slice(0, 1) === '/') match = match.slice(1);
 			type = 'mock';
 		}
 		return {
