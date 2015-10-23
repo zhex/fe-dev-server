@@ -19,11 +19,19 @@ module.exports = function (req, res, next) {
 		delete data['$$header'];
 	}
 
-	if (req.query.callback) {
-		res.setHeader('Access-Control-Allow-Origin', '*');
-		res.setHeader('Access-Control-Allow-Methods', '*');
-		res.jsonp(data);
-	} else {
-		res.json(data);
+	var delay = 0;
+	if (data.$$delay >= 0) {
+		delay = data.$$delay;
+		delete data['$$delay'];
 	}
+
+	setTimeout(function () {
+		if (req.query.callback) {
+			res.setHeader('Access-Control-Allow-Origin', '*');
+			res.setHeader('Access-Control-Allow-Methods', '*');
+			res.jsonp(data);
+		} else {
+			res.json(data);
+		}
+	}, delay);
 };

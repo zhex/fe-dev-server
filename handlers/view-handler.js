@@ -18,5 +18,14 @@ module.exports = function (req, res) {
 		delete data['$$header'];
 	}
 
-	res.render(match.file, data);
+	var delay = 0;
+	if (data.$$delay >= 0) {
+		delay = data.$$delay;
+		delete data['$$delay'];
+	}
+
+	setTimeout(function () {
+		res.render(match.file, data);
+	}, delay);
+
 };

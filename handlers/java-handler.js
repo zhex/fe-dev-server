@@ -29,6 +29,12 @@ module.exports = function (req, res, next) {
 		delete data['$$header'];
 	}
 
+	var delay = 0;
+	if (data.$$delay >= 0) {
+		delay = data.$$delay;
+		delete data['$$delay'];
+	}
+
 	var formData = {
 		template: match.file.slice(0, 1) === '/' ? match.file : '/' + match.file,
 		data: JSON.stringify(data)
@@ -37,10 +43,11 @@ module.exports = function (req, res, next) {
 
 	request.post(url, {form: formData}, function (err, response, body) {
 		if (err) return next(err);
-
-		res.status(response.statusCode);
-		res.setHeader('Content-Type', 'text/html');
-		res.write(body);
-		res.end();
+		setTimeout(function () {
+			res.status(response.statusCode);
+			res.setHeader('Content-Type', 'text/html');
+			res.write(body);
+			res.end();
+		}, delay);
 	});
 };
