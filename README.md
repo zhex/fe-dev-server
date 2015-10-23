@@ -97,6 +97,19 @@ available method:
 - utils.assign() - which is [object-assign](https://www.npmjs.com/package/object-assign) library
 - utils.moment() - which is [moment](http://momentjs.com/) library
 
+Also, you can add `$$header` in the data file to extend http response header, and using `$$delay` to set simulate the http connection delay.
+
+```js
+{
+	"$$header": {
+		"x-access-token": "abcs"
+	},
+	"$$delay": 3000,
+	"title": "hello world"
+}
+
+```
+
 ## embedded template engines
 
 - [jade](http://jade-lang.com/)
