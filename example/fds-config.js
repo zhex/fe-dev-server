@@ -1,3 +1,15 @@
 module.exports = {
-	basePath: '.'
+	basePath: __dirname,
+	publicFolder: 'public',
+	viewFolder: 'views',
+	mockFolder: 'mocks',
+	routeFile: 'routes.js',
+	proxy: null,
+	port: 3000,
+	enableJava: true,
+	javaServerPort: 12321,
+	open: {
+		route: '/',
+		browser: ['google chrome']
+	}
 };
