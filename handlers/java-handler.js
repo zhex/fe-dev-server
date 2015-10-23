@@ -22,6 +22,13 @@ module.exports = function (req, res, next) {
 	};
 	data = ds.get(match.file, req.query);
 
+	if (data.$$header) {
+		Object.keys(data.$$header).forEach(function (key) {
+			res.setHeader(key, data.$$header[key]);
+		});
+		delete data['$$header'];
+	}
+
 	var formData = {
 		template: match.file.slice(0, 1) === '/' ? match.file : '/' + match.file,
 		data: JSON.stringify(data)
@@ -31,7 +38,8 @@ module.exports = function (req, res, next) {
 	request.post(url, {form: formData}, function (err, response, body) {
 		if (err) return next(err);
 
-		res.writeHead(response.statusCode, {'Content-Type': 'text/html'});
+		res.status(response.statusCode);
+		res.setHeader('Content-Type', 'text/html');
 		res.write(body);
 		res.end();
 	});

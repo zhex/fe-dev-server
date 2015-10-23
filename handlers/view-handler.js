@@ -11,5 +11,12 @@ module.exports = function (req, res) {
 	};
 	data = ds.get(match.file, data);
 
+	if (data.$$header) {
+		Object.keys(data.$$header).forEach(function (key) {
+			res.setHeader(key, data.$$header[key]);
+		});
+		delete data['$$header'];
+	}
+
 	res.render(match.file, data);
 };

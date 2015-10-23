@@ -12,6 +12,13 @@ module.exports = function (req, res, next) {
 	var ds = new DataSet(match.searchType === 'view' ? config.viewFolder : config.mockFolder);
 	var data = ds.get(match.file, req.query);
 
+	if (data.$$header) {
+		Object.keys(data.$$header).forEach(function (key) {
+			res.setHeader(key, data.$$header[key]);
+		});
+		delete data['$$header'];
+	}
+
 	if (req.query.callback) {
 		res.setHeader('Access-Control-Allow-Origin', '*');
 		res.setHeader('Access-Control-Allow-Methods', '*');
