@@ -16,8 +16,8 @@ function create(config) {
 	instance.unref();
 
 	function onData(chunk) {
-		if (chunk.indexOf('ServerConnector@') >= 0) {
-			console.log(('Embedded Java Server is listening on port ' + config.javaServerPort).cyan);	
+		if (chunk.toString().indexOf('ServerConnector@') >= 0) {
+			console.log(('Embedded Java Server is listening on port ' + config.javaServerPort).cyan);
 		}
 	}
 
