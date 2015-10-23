@@ -48,13 +48,6 @@ var app = fds({
 	mockFolder: 'data',
 	port: 8001	
 });
-
-app.JavaServer.create(app.config);
-
-process.on('SIGINT', function () {
-	app.JavaServer.close();
-	process.exit();
-});
 ```
 
 ## Routes
