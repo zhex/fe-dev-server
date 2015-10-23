@@ -55,10 +55,6 @@ var server = module.exports = function (config) {
 		console.log('FE Dev Server is listening on port '.green + config.port.toString().green);
 	});
 
-	app.on('error', function (err) {
-		console.log(err)
-	});
-
 	process.on('uncaughtException', function(err) {
 	    if(err.errno === 'EADDRINUSE')
 	        console.log(('FE Dev Server:  Port ' + config.port + ' is already in use.').red);
