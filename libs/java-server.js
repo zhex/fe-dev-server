@@ -16,12 +16,18 @@ function create(config) {
 	instance.unref();
 
 	function onData(chunk) {
-		if (chunk.toString().indexOf('ServerConnector@') >= 0) {
+		var data = chunk.toString();
+		if (data.indexOf('Exception') >= 0) {
+			var match = data.match(/exception:?\s+([^\r\n]+)/i);
+			console.log(('Embedded Java Server: ' + match[1]).red);
+			instance.stderr.removeListener('data', onData);
+			close();
+		}
+		else if (data.indexOf('ServerConnector@') >= 0) {
 			console.log(('Embedded Java Server is listening on port ' + config.javaServerPort).cyan);
 		}
 	}
 
-	instance.stdout.on('data', onData);
 	instance.stderr.on('data', onData);
 }
 
@@ -29,7 +35,7 @@ function close() {
 	try {
 		if (instance) {
 			process.kill(instance.pid, 'SIGKILL');
-			console.log('\nEmbedded Java Server is stopped.'.cyan);
+			console.log('Embedded Java Server is stopped.'.cyan);
 		}
 	} catch(e) {}
 }
@@ -42,7 +48,10 @@ function restart(config) {
 }
 
 // catch ctrl+c
-process.on('SIGINT', close);
+process.on('SIGINT', function () {
+	console.log('\n');
+	close();
+});
 
 module.exports = {
 	create: create,

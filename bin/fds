@@ -17,7 +17,6 @@ program
 	.usage('<command> [options]')
 	.option('-o --open', 'open site in browser after server startup');
 
-
 program
 	.command('init [name]')
 	.description('initial the project')

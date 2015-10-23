@@ -7,6 +7,7 @@ var proxy = require('proxy-middleware');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
 var JavaServer = require('./libs/java-server');
+var findup = require('findup-sync');
 
 require('./libs/handlebars-helper');
 
@@ -54,12 +55,23 @@ var server = module.exports = function (config) {
 		console.log('FE Dev Server is listening on port '.green + config.port.toString().green);
 	});
 
+	app.on('error', function (err) {
+		console.log(err)
+	});
+
+	process.on('uncaughtException', function(err) {
+	    if(err.errno === 'EADDRINUSE')
+	        console.log(('FE Dev Server:  Port ' + config.port + ' is already in use.').red);
+	    else
+	        console.log(err);
+	});
+
 	return app;
 };
 
 
 function init() {
-	var config = path.resolve('fds-config.js');
+	var config = findup('fds-config.js');
 	server(config);
 }
 
