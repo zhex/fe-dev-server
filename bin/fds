@@ -19,7 +19,7 @@ program
 
 
 program
-	.command('init')
+	.command('init [name]')
 	.description('initial the project')
 	.action(init);
 
@@ -32,8 +32,11 @@ program.parse(process.argv);
 if (!program.args.length) server();
 
 
-function init() {
-	fs.copy(path.resolve(__dirname, '../example'), '.', function (err) {
+function init(name, opts) {
+	var dest = process.cwd();
+	if (name) dest = path.resolve(dest, name);
+
+	fs.copy(path.resolve(__dirname, '../example'), dest, function (err) {
 		if (err) {
 			console.error(err.red);
 			return;
