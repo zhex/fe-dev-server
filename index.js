@@ -4,16 +4,14 @@ var express = require('express');
 var cons = require('consolidate');
 var colors = require('colors');
 var proxy = require('proxy-middleware');
+var open = require('opn');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
 var JavaServer = require('./libs/java-server');
-var findup = require('findup-sync');
 
 require('./libs/handlebars-helper');
 
-var isMain = false;
-
-var server = module.exports = function (config) {
+module.exports = function (config) {
 	config = configHandler(config);
 
 	var app = express();
@@ -44,34 +42,35 @@ var server = module.exports = function (config) {
 		require('./handlers/error-handler')
 	);
 
-	if (!isMain && config.enableJava) {
-		JavaServer.create(config);
+	app.config = config;
+	app.javaServer = new JavaServer();
+
+	if (config.enableJava) {
+		app.javaServer.create(config);
 	}
 
-	app.config = config;
-	app.JavaServer = JavaServer;
+	app.openBrowser = function () {
+		var url = 'http://localhost:' + config.port + (config.open.route || '/');
+		open(url, { app: config.open.browser });
+	};
 
 	app.listen(config.port, function () {
 		console.log('FE Dev Server is listening on port '.green + config.port.toString().green);
 	});
 
 	process.on('uncaughtException', function(err) {
-	    if(err.errno === 'EADDRINUSE')
+	    if(err.errno === 'EADDRINUSE') {
 	        console.log(('FE Dev Server:  Port ' + config.port + ' is already in use.').red);
-	    else
+	        process.exit(1);
+	    } else
 	        console.log(err);
+	});
+
+	process.on('SIGINT', function () {
+		if (config.enableJava) app.javaServer.close();
+		console.log('FE Dev Server is stopped.'.green);
+		process.exit();
 	});
 
 	return app;
 };
-
-
-function init() {
-	var config = findup('fds-config.js');
-	server(config);
-}
-
-if (require.main === module) {
-	isMain = true;
-	init();
-}

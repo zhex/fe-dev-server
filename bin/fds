@@ -2,15 +2,10 @@
 
 var path = require('path');
 var fs = require('fs-extra');
-var nodemon = require('nodemon');
-var open = require('opn');
 var color = require('colors');
-var configHandler = require('../libs/config-handler');
-var utils = require('../libs/utils');
-var JavaServer = require('../libs/java-server');
 var program = require('commander');
 var findup = require('findup-sync');
-
+var fds = require('../index');
 
 program
 	.version(require('../package.json').version, '-v --version')
@@ -46,57 +41,16 @@ function init(name, opts) {
 
 function server() {
 	var configFile = findup('fds-config.js');
-	var opened = false;
 
 	if (!configFile) {
-		console.log('[Error] '.red + configFileName.magenta + ' is not found in path.');
+		console.log('[Error] '.red + 'fds-config.js'.magenta + ' is not found in path.');
 		return;
 	}
 
-	var config = configHandler(configFile);
+	var app = fds(configFile);
 
-	if (!fs.existsSync(config.routeFile)) {
-		console.log('[Error]'.red + ' Route file is not found.');
-		return;
+	if (program.open) {
+		app.javaServer.on('started', app.openBrowser);
 	}
-
-	nodemon({
-		script: path.resolve(__dirname, '../index.js'),
-		watch: [
-			config.routeFile,
-			configFile
-		],
-		ext: 'js json'
-	});
-
-	if (config.enableJava) JavaServer.create(config);
-
-	nodemon.on('start', function () {
-		if (!opened && program.open) {
-			setTimeout(function () {
-				var url = 'http://localhost:' + config.port + (config.open.route || '/');
-				open(url, {app: config.open.browser});
-				opened = true;
-			}, 1200);
-		}
-	});
-
-	nodemon.on('restart', function (files) {
-		console.log('FE Dev Server is restarting ....'.cyan);
-
-		if (utils.contains(files, configFile)) {
-			config = configHandler(configFile, true);
-
-			if (config.enableJava)
-				JavaServer.restart(config);
-			else
-				JavaServer.close();
-		}
-	});
-
-	process.on('SIGINT', function () {
-		console.log('FE Dev Server is stopped.'.green);
-		process.exit();
-	});
 }
 

@@ -38,6 +38,12 @@ start up server
 $ fds
 ```
 
+start up server & open browser
+
+```
+$ fds -o
+```
+
 Also, it can be integrated into your own project as a node module.
 
 ```js

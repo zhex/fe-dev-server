@@ -1,11 +1,18 @@
 var fs = require('fs');
 var pathRegexp = require('path-to-regexp');
+var chokidar = require('chokidar');
 
 var SYMBOL_MOCK = 'mock::';
 
 function Router(routeFile) {
 	this.routes = [];
 	this.loadRoutes(routeFile);
+
+	chokidar.watch(routeFile).on('change', function () {
+		delete require.cache[routeFile];
+		this.routes = [];
+		this.loadRoutes(routeFile);
+	}.bind(this));
 }
 
 Router.prototype.loadRoutes = function (routeFile) {

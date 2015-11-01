@@ -1,10 +1,17 @@
 var path = require('path');
 var spawn = require('child_process').spawn;
 var colors = require('colors');
+var EventEmitter = require('events');
+var util = require('util');
 
-var instance;
+function JavaServer() {
+	this.instance = null;
+	EventEmitter.call(this);
+}
 
-function create(config) {
+util.inherits(JavaServer, EventEmitter);
+
+JavaServer.prototype.create = function (config) {
 	var jarPath = path.resolve(__dirname, '../jetty/server.jar');
 	var args = [
 		'-Dviewpath=' + config.viewFolder,
@@ -12,49 +19,40 @@ function create(config) {
 		'-jar', jarPath
 	];
 
-	instance = spawn('java', args, {cwd: __dirname, detached: true});
-	instance.unref();
+	this.instance = spawn('java', args, {cwd: __dirname, detached: true});
+	this.instance.unref();
 
 	function onData(chunk) {
 		var data = chunk.toString();
 		if (data.indexOf('Exception') >= 0) {
 			var match = data.match(/exception:?\s+([^\r\n]+)/i);
 			console.log(('Embedded Java Server: ' + match[1]).red);
-			instance.stderr.removeListener('data', onData);
-			close();
+			// instance.stderr.removeListener('data', onData);
+			// close();
 		}
 		else if (data.indexOf('ServerConnector@') >= 0) {
 			console.log(('Embedded Java Server is listening on port ' + config.javaServerPort).cyan);
+			this.emit('started');
 		}
 	}
 
-	instance.stderr.on('data', onData);
+	this.instance.stderr.on('data', onData.bind(this));
 }
 
-function close() {
+JavaServer.prototype.close = function () {
 	try {
-		if (instance) {
-			process.kill(instance.pid, 'SIGKILL');
+		if (this.instance) {
+			process.kill(this.instance.pid, 'SIGKILL');
 			console.log('Embedded Java Server is stopped.'.cyan);
 		}
 	} catch(e) {}
 }
 
-function restart(config) {
-	close();
+JavaServer.prototype.restart = function (config) {
+	this.close();
 	setTimeout(function () {
-		create(config);
-	}, 30);
+		this.create(config);
+	}.bind(this), 30);
 }
 
-// catch ctrl+c
-process.on('SIGINT', function () {
-	console.log('\n');
-	close();
-});
-
-module.exports = {
-	create: create,
-	close: close,
-	restart: restart
-};
+module.exports = JavaServer;
