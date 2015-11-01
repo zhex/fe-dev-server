@@ -12,7 +12,9 @@ module.exports = function (config) {
 		req._fds = {
 			route: route,
 			match: match,
-			config: config
+			config: config,
+			delay: 0,
+			data: null
 		};
 
 		try {

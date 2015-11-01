@@ -15,29 +15,9 @@ module.exports = function (req, res, next) {
 		return next(new Error('Please enable Java support in your fds-config.js file.'));
 	}
 
-	var ds = new DataSet(config.mockFolder);
-	var data = {
-		params: match.params,
-		query: req.query
-	};
-	data = ds.get(match.file, req.query);
-
-	if (data.$$header) {
-		Object.keys(data.$$header).forEach(function (key) {
-			res.setHeader(key, data.$$header[key]);
-		});
-		delete data['$$header'];
-	}
-
-	var delay = 0;
-	if (data.$$delay >= 0) {
-		delay = data.$$delay;
-		delete data['$$delay'];
-	}
-
 	var formData = {
 		template: match.file.slice(0, 1) === '/' ? match.file : '/' + match.file,
-		data: JSON.stringify(data)
+		data: JSON.stringify(req._fds.data)
 	};
 	var url = 'http://localhost:' + config.javaServerPort + '/render?' + utils.serialize(req.query);
 
@@ -48,6 +28,6 @@ module.exports = function (req, res, next) {
 			res.setHeader('Content-Type', 'text/html');
 			res.write(body);
 			res.end();
-		}, delay);
+		}, req._fds.delay);
 	});
 };
