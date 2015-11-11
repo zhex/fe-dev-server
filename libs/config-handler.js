@@ -8,6 +8,7 @@ var defaultConfig = {
 	viewFolder: 'views',
 	mockFolder: 'mocks',
 	routeFile: 'routes.js',
+	mockExts: ['.js', '.json'],
 	proxy: null,
 	port: 3000,
 	enableJava: true,

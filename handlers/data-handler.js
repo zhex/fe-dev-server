@@ -9,7 +9,10 @@ module.exports = function (req, res, next) {
 	if (!utils.contains(['.json', '.js'], path.extname(match.file)))
 		return next();
 
-	var ds = new DataSet(match.searchType === 'view' ? config.viewFolder : config.mockFolder);
+	var ds = new DataSet(
+		match.searchType === 'view' ? config.viewFolder : config.mockFolder,
+		config.mockExts
+	);
 	var data = ds.get(match.file, req.query);
 
 	if (data.$$header) {

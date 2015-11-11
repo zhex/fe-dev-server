@@ -2,9 +2,9 @@ var path = require('path');
 var fs = require('fs');
 var utils = require('./utils');
 
-function DataSet(path) {
+function DataSet(path, exts) {
 	this.path = path;
-	this.exts = ['.js', '.json'];
+	this.exts = exts;
 }
 
 DataSet.prototype.get = function (file, params) {
