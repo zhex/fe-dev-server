@@ -171,6 +171,11 @@ default: 'routes.js'
 
 Routes mapping file
 
+### mockExts
+
+default: ['.js', '.json']
+
+Some people like to set mockFolder as the same as viewFolder for convinence reason, `mockExts` give you the ability to define your own mock file type to avoid the conflict issue. Also, the ext order in array demonstrate the priority from higher to lower.
 
 ### proxy
 
