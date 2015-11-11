@@ -78,6 +78,13 @@
 		h2.error {
 			color: red;
 		}
+
+		.ext {
+			display: inline-block;
+			padding: 3px 10px;
+			margin-right: 10px;
+			background: #f7f7f7;
+		}
 	</style>
 </head>
 <body>
@@ -133,6 +140,14 @@
 		<tr>
 			<th>Route File</th>
 			<td>{{config.routeFile}}</td>
+		</tr>
+		<tr>
+			<th>Mock Extensions</th>
+			<td>
+			{{#each config.mockExts}}
+				<span class="ext">{{this}}</span>
+			{{/each}}
+			</td>
 		</tr>
 		<tr>
 			<th>Server Port</th>
