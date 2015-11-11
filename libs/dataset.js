@@ -4,6 +4,7 @@ var utils = require('./utils');
 
 function DataSet(path) {
 	this.path = path;
+	this.exts = ['.js', '.json'];
 }
 
 DataSet.prototype.get = function (file, params) {
@@ -16,11 +17,12 @@ DataSet.prototype.get = function (file, params) {
 	var dataFile = file.replace(regexp, '');
 	dataFile = path.resolve(this.path, dataFile);
 
-
-	if (fs.existsSync(dataFile + '.js'))
-		dataExt = '.js';
-	else if (fs.existsSync(dataFile + '.json'))
-		dataExt = '.json';
+	this.exts.some(function (ext) {
+		if (fs.existsSync(dataFile + ext)) {
+			dataExt = ext;
+			return true;
+		}
+	});
 
 	if (dataExt) {
 		dataFile += dataExt;
