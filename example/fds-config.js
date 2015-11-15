@@ -9,6 +9,7 @@ module.exports = {
 	port: 3000,
 	enableJava: true,
 	javaServerPort: 12321,
+	livereload: true,
 	open: {
 		route: '/',
 		browser: ['google chrome']
