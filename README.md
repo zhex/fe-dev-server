@@ -207,6 +207,12 @@ default: 12321
 
 FE server will run a child process for light java server to serve the templates in java, you can change the java server port if it is conflict with your other service.
 
+### livereload
+
+default: true
+
+livereload is awesome, it will refresh your browser automatically after anything changed. If you dont like this feature, you can set it to `false` to switch it off.
+
 ### open
 
 default: { route: '/', browser: ['google chrome'] }
