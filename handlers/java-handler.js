@@ -25,7 +25,12 @@ module.exports = function (req, res, next) {
 		if (err) return next(err);
 
 		if (req._fds.lrScript) {
-			body = body.split('</body>').join(req._fds.lrScript + '</body>');
+			body = body.split('</body>');
+			if (body.length === 1) {
+				body = body[0] + req._fds.lrScript;
+			} else {
+				body = body.join(req._fds.lrScript + '</body>');
+			}
 		}
 
 		setTimeout(function () {
