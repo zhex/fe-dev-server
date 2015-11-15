@@ -5,6 +5,7 @@ var cons = require('consolidate');
 var colors = require('colors');
 var proxy = require('proxy-middleware');
 var open = require('opn');
+var livereload = require('livereload');
 var configHandler = require('./libs/config-handler');
 var utils = require('./libs/utils');
 var JavaServer = require('./libs/java-server');
@@ -48,6 +49,19 @@ module.exports = function (config) {
 
 	if (config.enableJava) {
 		app.javaServer.create(config);
+	}
+
+	// enable livereload server if needed
+	if (config.livereload) {
+		var lrServer = livereload.createServer({
+			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ]
+		});
+
+		lrServer.watch([
+			config.viewFolder,
+			config.mockFolder,
+			config.publicFolder
+		]);
 	}
 
 	app.openBrowser = function () {

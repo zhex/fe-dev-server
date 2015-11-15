@@ -38,6 +38,7 @@
     "fs-extra": "^0.23.1",
     "handlebars": "^3.0.3",
     "jade": "^1.11.0",
+    "livereload": "^0.4.0",
     "moment": "^2.10.6",
     "morgan": "^1.6.1",
     "object-assign": "^3.0.0",

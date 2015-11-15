@@ -23,6 +23,11 @@ module.exports = function (req, res, next) {
 
 	request.post(url, {form: formData}, function (err, response, body) {
 		if (err) return next(err);
+
+		if (req._fds.lrScript) {
+			body = body.split('</body>').join(req._fds.lrScript + '</body>');
+		}
+
 		setTimeout(function () {
 			res.status(response.statusCode);
 			res.setHeader('Content-Type', 'text/html');

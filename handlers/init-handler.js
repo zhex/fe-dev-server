@@ -17,6 +17,10 @@ module.exports = function (config) {
 			data: null
 		};
 
+		if (config.livereload) {
+			req._fds.lrScript = "<script>document.write('<script src=\"http://' + (location.host || 'localhost').split(':')[0] + ':" + 35729 + "/livereload.js\"></' + 'script>')</script>";
+		}
+
 		try {
 			if (!match)
 				throw new Error('No route defined in: ' + config.routeFile);
