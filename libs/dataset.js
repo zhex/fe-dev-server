@@ -1,5 +1,6 @@
 var path = require('path');
 var fs = require('fs');
+var vm = require('vm');
 var utils = require('./utils');
 
 function DataSet(path, exts) {
@@ -26,11 +27,23 @@ DataSet.prototype.get = function (file, params) {
 
 	if (dataExt) {
 		dataFile += dataExt;
-		delete require.cache[dataFile];
-		data = require(dataFile);
-	}
+		var content = fs.readFileSync(dataFile).toString();
 
-	if (utils.isFunc(data)) data = data(params, utils);
+		try {
+			data = JSON.parse(content)
+		} catch(ex) {
+			var sandbox = { module: {}, exports: {} };
+
+			vm.createContext(sandbox);
+			vm.runInContext(content, sandbox);
+			data = sandbox.module.exports;
+
+			if (utils.isFunc(data))
+				data = data(params, utils);
+			else
+				data = utils.assign({}, data);
+		}
+	}
 
 	return data;
 };
