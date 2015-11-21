@@ -1,17 +1,14 @@
 var DataSet = require('../libs/dataset');
+var lrScript = require('../libs/lr-script');
 
 module.exports = function (req, res) {
 	var match = req._fds.match;
+	var config = req._fds.config;
 
 	setTimeout(function () {
 		res.render(match.file, req._fds.data, function (err, html) {
-			if (req._fds.lrScript) {
-				html = html.split('</body>');
-				if (html.length === 1) {
-					html = html[0] + req._fds.lrScript;
-				} else {
-					html = html.join(req._fds.lrScript + '</body>');
-				}
+			if (config.livereload) {
+				html = lrScript.getInjectHtml(html);
 			}
 			res.send(html);
 		});

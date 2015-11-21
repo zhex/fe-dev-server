@@ -2,6 +2,7 @@ var path = require('path');
 var request = require('request');
 var utils = require('../libs/utils');
 var DataSet = require('../libs/dataset');
+var lrScript = require('../libs/lr-script');
 
 module.exports = function (req, res, next) {
 	var config = req._fds.config;
@@ -24,13 +25,8 @@ module.exports = function (req, res, next) {
 	request.post(url, {form: formData}, function (err, response, body) {
 		if (err) return next(err);
 
-		if (req._fds.lrScript) {
-			body = body.split('</body>');
-			if (body.length === 1) {
-				body = body[0] + req._fds.lrScript;
-			} else {
-				body = body.join(req._fds.lrScript + '</body>');
-			}
+		if (config.livereload) {
+			body = lrScript.getInjectHtml(body);
 		}
 
 		setTimeout(function () {
