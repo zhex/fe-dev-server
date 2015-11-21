@@ -25,11 +25,13 @@ module.exports = function (config) {
 			if (!match)
 				throw new Error('No route defined in: ' + config.routeFile);
 
-			var  filePath= match.searchType === 'mock' ? config.mockFolder : config.viewFolder;
-			file = path.resolve(filePath, match.file);
+			if (match.searchType !== 'url') {
+				var filePath = match.searchType === 'mock' ? config.mockFolder : config.viewFolder;
+				file = path.resolve(filePath, match.file);
 
-			if (!fs.existsSync(file))
-				throw new Error('Template file: ' + file + ' is not found');
+				if (!fs.existsSync(file))
+					throw new Error('Template file: ' + file + ' is not found');
+			}
 
 			next();
 		} catch(e) {

@@ -59,10 +59,14 @@ Router.prototype.search = function (url, method) {
 
 	if (match) {
 		var type = 'view';
+		var urlExp = /(http|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?/;
+
 		if (match.indexOf(SYMBOL_MOCK) >= 0) {
 			match = match.replace(SYMBOL_MOCK, '');
 			if (match.slice(0, 1) === '/') match = match.slice(1);
 			type = 'mock';
+		} else if (urlExp.test(match)) {
+			type = 'url';
 		}
 		return {
 			file: match,

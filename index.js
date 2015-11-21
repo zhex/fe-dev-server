@@ -37,6 +37,7 @@ module.exports = function (config) {
 		'/:pattern(*)',
 		require('./handlers/init-handler')(config),
 		require('./handlers/data-handler'),
+		require('./handlers/proxy-handler'),
 		require('./handlers/view-data-handler'),
 		require('./handlers/java-handler'),
 		require('./handlers/view-handler'),
