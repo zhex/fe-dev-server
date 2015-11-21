@@ -68,7 +68,8 @@ module.exports = {
 	'GET::/books':   		'books.jade',
 	'POST::/api/books':  	'mock::books.json',
 	'GET::/api/category':  	'mock::category.js',
-	'/jsp-page':			'books.jsp'
+	'/jsp-page':			'books.jsp',
+	'/proxy-api': 			'http://www.github.com/zhex.json'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
