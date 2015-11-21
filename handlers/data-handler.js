@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
 	var config = req._fds.config;
 	var match = req._fds.match;
 
-	if (!utils.contains(['.json', '.js'], path.extname(match.file)))
+	if (!utils.contains(config.mockExts, path.extname(match.file)))
 		return next();
 
 	var ds = new DataSet(
