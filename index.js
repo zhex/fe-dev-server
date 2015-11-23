@@ -66,8 +66,16 @@ module.exports = function (config) {
 	}
 
 	app.openBrowser = function () {
-		var url = 'http://localhost:' + config.port + (config.open.route || '/');
-		open(url, { app: config.open.browser });
+		var openMe = function () {
+			var url = 'http://localhost:' + config.port + (config.open.route || '/');
+			open(url, { app: config.open.browser });
+		};
+
+		if (config.enableJava) {
+			app.javaServer.on('started', openMe);
+		} else {
+			openMe();
+		}
 	};
 
 	app.listen(config.port, function () {

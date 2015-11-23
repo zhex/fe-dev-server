@@ -49,8 +49,6 @@ function server() {
 
 	var app = fds(configFile);
 
-	if (program.open) {
-		app.javaServer.on('started', app.openBrowser);
-	}
+	if (program.open) app.openBrowser();
 }
 
