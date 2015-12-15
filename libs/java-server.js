@@ -1,5 +1,5 @@
 var path = require('path');
-var spawn = require('child_process').spawn;
+var spawn = require('cross-spawn');
 var colors = require('colors');
 var EventEmitter = require('events');
 var util = require('util');

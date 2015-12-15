@@ -1,6 +1,6 @@
 {
   "name": "fe-dev-server",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "a dev server for frontend developers",
   "main": "index.js",
   "bin": {
@@ -32,6 +32,7 @@
     "colors": "^1.1.2",
     "commander": "^2.8.1",
     "consolidate": "^0.13.1",
+    "cross-spawn": "^2.1.0",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "findup-sync": "^0.3.0",
