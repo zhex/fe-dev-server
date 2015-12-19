@@ -1,4 +1,5 @@
 var path = require('path');
+var fs = require('fs');
 var url = require('url');
 var express = require('express');
 var cons = require('consolidate');
@@ -16,9 +17,9 @@ module.exports = function (config) {
 	config = configHandler(config);
 
 	var app = express();
+	app.config = config;
 
 	app.use(require('morgan')('dev'));
-	app.use(express.static(config.publicFolder));
 
 	app.engine('html', cons.ejs);
 	app.engine('jade', cons.jade);
@@ -27,12 +28,34 @@ module.exports = function (config) {
 	app.set('view engine', 'html');
 	app.set('views', config.viewFolder);
 
+	// set proxy routes
 	if (config.proxy && utils.isObject(config.proxy)) {
 		Object.keys(config.proxy).forEach(function (k) {
 			app.use(k, proxy(url.parse(config.proxy[k])));
 		});
 	}
 
+	// serve reload server
+	if (config.livereload) {
+		app.use(
+			require('./handlers/static-html-handler')(config),
+			express.static(config.publicFolder)
+		);
+
+		var lrServer = livereload.createServer({
+			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ]
+		});
+
+		lrServer.watch([
+			config.viewFolder,
+			config.mockFolder,
+			config.publicFolder
+		]);
+	} else {
+		app.use(express.static(config.publicFolder));
+	}
+
+	// route handle
 	app.all(
 		'/:pattern(*)',
 		require('./handlers/init-handler')(config),
@@ -45,24 +68,10 @@ module.exports = function (config) {
 		require('./handlers/error-handler')
 	);
 
-	app.config = config;
-
+	// launch java server in child process
 	if (config.enableJava) {
 		app.javaServer = new JavaServer();
 		app.javaServer.create(config);
-	}
-
-	// enable livereload server if needed
-	if (config.livereload) {
-		var lrServer = livereload.createServer({
-			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ]
-		});
-
-		lrServer.watch([
-			config.viewFolder,
-			config.mockFolder,
-			config.publicFolder
-		]);
 	}
 
 	app.openBrowser = function () {
