@@ -46,9 +46,9 @@ module.exports = function (config) {
 	);
 
 	app.config = config;
-	app.javaServer = new JavaServer();
 
 	if (config.enableJava) {
+		app.javaServer = new JavaServer();
 		app.javaServer.create(config);
 	}
 
