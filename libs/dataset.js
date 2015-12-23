@@ -33,11 +33,8 @@ DataSet.prototype.get = function (file, params) {
 
 		if (content.indexOf('module.exports') >= 0) {
 			var err = check(content, dataFile);
-			if (err) {
-				return err;
-			} else {
-				data = jsHandler(content, params);
-			}
+			if (err) return err;
+			data = jsHandler(content, params);
 		} else {
 			data = JSON.parse(content);
 		}
@@ -47,11 +44,11 @@ DataSet.prototype.get = function (file, params) {
 };
 
 function jsHandler(content, params) {
-
 	var sandbox = { module: {}, exports: {} };
 
 	vm.createContext(sandbox);
 	vm.runInContext(content, sandbox);
+
 	var data = sandbox.module.exports;
 
 	if (utils.isFunc(data))
