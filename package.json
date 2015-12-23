@@ -46,7 +46,8 @@
     "opn": "^3.0.2",
     "path-to-regexp": "^1.2.0",
     "proxy-middleware": "^0.13.1",
-    "request": "^2.61.0"
+    "request": "^2.61.0",
+    "syntax-error": "^1.1.4"
   },
   "devDependencies": {
     "mocha": "^2.2.5",

@@ -11,6 +11,11 @@ module.exports = function (req, res, next) {
 	};
 	req._fds.data = data = ds.get(match.file, data);
 
+	if (data instanceof Error) {
+		req._err = 500;
+		return next(data);
+	}
+
 	if (data.$$header) {
 		Object.keys(data.$$header).forEach(function (key) {
 			res.setHeader(key, data.$$header[key]);
