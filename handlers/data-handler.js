@@ -13,7 +13,10 @@ module.exports = function (req, res, next) {
 		match.searchType === 'view' ? config.viewFolder : config.mockFolder,
 		config.mockExts
 	);
-	var data = ds.get(match.file, req.query);
+	var data = ds.get(match.file, {
+		params: match.params,
+		query: req.query
+	});
 
 	if (data.$$header) {
 		Object.keys(data.$$header).forEach(function (key) {
