@@ -69,7 +69,8 @@ module.exports = {
 	'POST::/api/books':  	'mock::books.json',
 	'GET::/api/category':  	'mock::category.js',
 	'/jsp-page':			'books.jsp',
-	'/proxy-api': 			'http://www.github.com/zhex.json'
+	'/proxy-api': 			'http://www.github.com/zhex.json',
+	'ALL:/books/pattern*':   'http://example.com/books/'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
@@ -178,7 +179,7 @@ default: ['.js', '.json']
 
 Some people like to set mockFolder as the same as viewFolder for convinence reason, `mockExts` give you the ability to define your own mock file type to avoid the conflict issue. Also, the ext order in array demonstrate the priority from higher to lower.
 
-### proxy
+### proxy (Deprecated, using router proxy instead)
 
 default: null
 
