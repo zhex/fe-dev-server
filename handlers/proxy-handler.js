@@ -7,6 +7,10 @@ module.exports = function (req, res, next) {
 	if (match.searchType !== 'url') {
 		return next();
 	}
-	var url = match.file + (req.query ?  '?' + utils.serialize(req.query) : '');
-	req.pipe(request(url)).pipe(res);
+
+	var url = match.file
+		+ (match.params.pattern || '')
+		+ (req.query ?  '?' + utils.serialize(req.query) : '');
+
+	req.pipe(request({ url: url, method: req.method })).pipe(res);
 };

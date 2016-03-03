@@ -37,11 +37,13 @@ Router.prototype.search = function (url, method) {
 	var match = null;
 	var params = {};
 
+	method = method.toLowerCase();
+
 	this.routes.some(function (r) {
 		var re = pathRegexp(r.route);
 		var result = re.exec(url);
 
-		if (result && r.method.toLowerCase() === method.toLowerCase()) {
+		if (result && (r.method.toLowerCase() === 'all' || r.method.toLowerCase() === method)) {
 			match = r.file;
 			if (match.slice(0, 1) === '/') match = match.slice(1);
 
