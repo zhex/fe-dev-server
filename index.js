@@ -3,6 +3,7 @@ var fs = require('fs');
 var url = require('url');
 var express = require('express');
 var cons = require('consolidate');
+var bodyParser = require('body-parser');
 var colors = require('colors');
 var proxy = require('proxy-middleware');
 var open = require('opn');
@@ -27,6 +28,9 @@ module.exports = function (config) {
 
 	app.set('view engine', 'html');
 	app.set('views', config.viewFolder);
+
+	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({ extended: true }));
 
 	// set proxy routes
 	if (config.proxy && utils.isObject(config.proxy)) {

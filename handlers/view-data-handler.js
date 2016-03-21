@@ -7,7 +7,8 @@ module.exports = function (req, res, next) {
 	var ds = new DataSet(config.mockFolder, config.mockExts);
 	var data = {
 		params: match.params,
-		query: req.query
+		query: req.query,
+		body: req.body
 	};
 	req._fds.data = data = ds.get(match.file, data);
 

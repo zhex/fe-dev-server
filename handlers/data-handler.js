@@ -15,7 +15,8 @@ module.exports = function (req, res, next) {
 	);
 	var data = ds.get(match.file, {
 		params: match.params,
-		query: req.query
+		query: req.query,
+		body: req.body
 	});
 
 	if (data.$$header) {

@@ -28,6 +28,7 @@
     "velocity"
   ],
   "dependencies": {
+    "body-parser": "^1.15.0",
     "chokidar": "^1.2.0",
     "colors": "^1.1.2",
     "commander": "^2.8.1",
