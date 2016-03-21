@@ -87,7 +87,8 @@ If the mock file is a js file, then it is good to define as a module function:
 module.exports = function (data, utils) {
 	return {
 		id: data.params.id,
-		name: data.query.name || 'hello world'
+		name: data.query.name || 'hello world',
+		content: data.body.content
 	};
 };
 ```
