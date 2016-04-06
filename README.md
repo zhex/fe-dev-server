@@ -70,7 +70,7 @@ module.exports = {
 	'GET::/api/category':  	'mock::category.js',
 	'/jsp-page':			'books.jsp',
 	'/proxy-api': 			'http://www.github.com/zhex.json',
-	'ALL:/books/pattern*':   'http://example.com/books/'
+	'ALL:/books/:pattern*':   'http://example.com/books/'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
