@@ -97,7 +97,7 @@ module.exports = function (config) {
 
 	process.on('uncaughtException', function(err) {
 	    if(err.errno === 'EADDRINUSE') {
-	        console.log(('FE Dev Server:  Port ' + config.port + ' is already in use.').red);
+	        console.log(('FE Dev Server:  Port ' + err.port + ' is already in use.').red);
 	        process.exit(1);
 	    } else
 	        console.log(err);
