@@ -204,7 +204,7 @@ default: true
 
 Sometimes you don't need to support java templates, you can turn it off with this property to `false`.
 
-### javaServerPort
+### javaServerPort (Deprecated, port will be auto generated)
 
 default: 12321
 

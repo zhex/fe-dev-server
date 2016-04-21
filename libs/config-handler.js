@@ -47,8 +47,6 @@ function extendConfig(config) {
 	if (config.livereload) {
 		config.livereloadPort = findPort(defaultLivereloadPort);
 	}
-	console.log(config);
-
 	return config;
 }
 
