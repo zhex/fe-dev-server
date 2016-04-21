@@ -34,6 +34,7 @@
     "commander": "^2.8.1",
     "consolidate": "^0.13.1",
     "cross-spawn": "^2.1.0",
+    "deasync": "^0.1.4",
     "ejs": "^2.3.3",
     "express": "^4.13.3",
     "findup-sync": "^0.3.0",
@@ -46,6 +47,7 @@
     "object-assign": "^3.0.0",
     "opn": "^3.0.2",
     "path-to-regexp": "^1.2.0",
+    "portscanner": "^1.0.0",
     "proxy-middleware": "^0.13.1",
     "request": "^2.61.0",
     "syntax-error": "^1.1.4"

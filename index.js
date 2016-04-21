@@ -47,7 +47,8 @@ module.exports = function (config) {
 		);
 
 		var lrServer = livereload.createServer({
-			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ]
+			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ],
+			port: config.livereloadPort
 		});
 
 		lrServer.watch([
@@ -98,6 +99,7 @@ module.exports = function (config) {
 	process.on('uncaughtException', function(err) {
 	    if(err.errno === 'EADDRINUSE') {
 	        console.log(('FE Dev Server:  Port ' + err.port + ' is already in use.').red);
+	        if (config.enableJava) app.javaServer.close();
 	        process.exit(1);
 	    } else
 	        console.log(err);

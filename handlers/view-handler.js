@@ -9,7 +9,7 @@ module.exports = function (req, res, next) {
 		if (err) return next(err);
 
 		if (config.livereload) {
-			html = lrScript.getInjectHtml(html);
+			html = lrScript.getInjectHtml(html, config.livereloadPort);
 		}
 
 		setTimeout(function () {

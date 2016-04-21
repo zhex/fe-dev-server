@@ -7,7 +7,7 @@ module.exports = function (config) {
 		var file = path.join(config.publicFolder, req.url);
 		if (req.url.match(/\.html$/) && fs.existsSync(file)) {
 			var html = fs.readFileSync(file).toString();
-			html = lrScript.getInjectHtml(html);
+			html = lrScript.getInjectHtml(html, config.livereloadPort);
 			res.setHeader('Content-Type', 'text/html');
 			res.send(html);
 		} else
