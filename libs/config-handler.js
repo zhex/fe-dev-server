@@ -59,5 +59,10 @@ module.exports = function (config, force) {
 	if (config.javaServerPort) {
 		console.warn('WARN: config.javaServerPort is deprecated; please remove it in your fds-config.js file!'.yellow);
 	}
+
+	if (config.proxy) {
+		console.warn('WARN: config.proxy is deprecated; please set proxy route in file routes.js'.yellow);
+	}
+
 	return extendConfig(config);
 };
