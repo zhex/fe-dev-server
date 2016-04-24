@@ -99,16 +99,18 @@ module.exports = function (config) {
 	process.on('uncaughtException', function(err) {
 	    if(err.errno === 'EADDRINUSE') {
 	        console.log(('FE Dev Server:  Port ' + err.port + ' is already in use.').red);
-	        if (config.enableJava) app.javaServer.close();
 	        process.exit(1);
 	    } else
 	        console.log(err);
 	});
 
 	process.on('SIGINT', function () {
-		if (config.enableJava) app.javaServer.close();
 		console.log('FE Dev Server is stopped.'.green);
 		process.exit();
+	});
+
+	process.on('exit', function () {
+		if (config.enableJava) app.javaServer.close();
 	});
 
 	return app;
