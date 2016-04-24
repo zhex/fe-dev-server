@@ -50,9 +50,9 @@ Also, it can be integrated into your own project as a node module.
 var fds = require('fe-dev-server');
 
 var app = fds({
-	basePath: __dirname,
-	mockFolder: 'data',
-	port: 8001	
+    basePath: __dirname,
+    mockFolder: 'data',
+    port: 8001  
 });
 ```
 
@@ -64,13 +64,13 @@ Sample:
 
 ```js
 module.exports = {
-	'/test':         		'test.html',
-	'GET::/books':   		'books.jade',
-	'POST::/api/books':  	'mock::books.json',
-	'GET::/api/category':  	'mock::category.js',
-	'/jsp-page':			'books.jsp',
-	'/proxy-api': 			'http://www.github.com/zhex.json',
-	'ALL:/books/:pattern*':   'http://example.com/books/'
+    '/test':                    'test.html',
+    'GET::/books':              'books.jade',
+    'POST::/api/books':         'mock::books.json',
+    'GET::/api/category':       'mock::category.js',
+    '/jsp-page':                'books.jsp',
+    '/proxy-api':               'http://www.github.com/zhex.json',
+    'ALL::/books/:pattern*':    'http://example.com/books/'
 };
 ```
 the rule is `'[method]::[route_url]': '[template_file]'`.
@@ -85,11 +85,11 @@ If the mock file is a js file, then it is good to define as a module function:
 
 ```js
 module.exports = function (data, utils) {
-	return {
-		id: data.params.id,
-		name: data.query.name || 'hello world',
-		content: data.body.content
-	};
+    return {
+        id: data.params.id,
+        name: data.query.name || 'hello world',
+        content: data.body.content
+    };
 };
 ```
 The `data.params` is the match variable collection in the particular route; The `data.query` is the query data from request url, so you can easily test your page with different api return.
@@ -110,11 +110,11 @@ Also, you can add `$$header` in the data file to extend http response header, an
 
 ```js
 {
-	"$$header": {
-		"x-access-token": "abcs"
-	},
-	"$$delay": 3000,
-	"title": "hello world"
+    "$$header": {
+        "x-access-token": "abcs"
+    },
+    "$$delay": 3000,
+    "title": "hello world"
 }
 
 ```
@@ -134,13 +134,13 @@ You can custom your configuration in `fds-config.js` file.
 
 ```js
 defaultConfig = {
-	basePath: path.resolve(__dirname, './example'),
-	publicFolder: 'public',
-	viewFolder: 'views',
-	mockFolder: 'mocks',
-	routeFile: 'routes.js',
-	proxy: null,
-	port: 3000
+    basePath: path.resolve(__dirname, './example'),
+    publicFolder: 'public',
+    viewFolder: 'views',
+    mockFolder: 'mocks',
+    routeFile: 'routes.js',
+    proxy: null,
+    port: 3000
 }
 ```
 
@@ -188,7 +188,7 @@ During the test, we want to get the api data from the real backend server; then 
 
 ```js
 proxy: {
-	'/api': 'http://www.example.com/api'
+    '/api': 'http://www.example.com/api'
 }
 ```
 
