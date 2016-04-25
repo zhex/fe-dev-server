@@ -26,7 +26,7 @@ module.exports = function (req, res, next) {
 		if (err) return next(err);
 
 		if (config.livereload) {
-			body = lrScript.getInjectHtml(body);
+			body = lrScript.getInjectHtml(body, config.livereloadPort);
 		}
 
 		setTimeout(function () {
