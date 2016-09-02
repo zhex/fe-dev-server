@@ -105,6 +105,7 @@ available method:
 - utils.serialize(obj)
 - utils.assign() - which is [object-assign](https://www.npmjs.com/package/object-assign) library
 - utils.moment() - which is [moment](http://momentjs.com/) library
+- utils.Mock - which is [mockjs](http://mockjs.com) library
 
 Also, you can add `$$header` in the data file to extend http response header, and using `$$delay` to set simulate the http connection delay.
 
