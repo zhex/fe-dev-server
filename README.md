@@ -140,7 +140,6 @@ defaultConfig = {
     viewFolder: 'views',
     mockFolder: 'mocks',
     routeFile: 'routes.js',
-    proxy: null,
     port: 3000
 }
 ```

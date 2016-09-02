@@ -5,7 +5,6 @@ module.exports = {
 	mockFolder: 'mocks',
 	routeFile: 'routes.js',
 	mockExts: ['.js', '.json'],
-	proxy: null,
 	port: 3000,
 	enableJava: true,
 	livereload: true,
