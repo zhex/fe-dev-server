@@ -64,12 +64,27 @@ Sample:
 
 ```js
 module.exports = {
+    // set /test route to test.html page, default http method is GET
     '/test':                    'test.html',
+    
+    // set /books route to books.jade template with GET method
     'GET::/books':              'books.jade',
+    
+    // set json api with a json file in mock folder
     'POST::/api/books':         'mock::books.json',
+    
+    // mock file can also be a js file, which has more power to do the customization
     'GET::/api/category':       'mock::category.js',
+
+    // fds works with java template such as jsp;
+    // before do this, you have to set enableJava to true in your fds-config.js file
     '/jsp-page':                'books.jsp',
+    
+    // it allow your route to proxy an online page
     '/proxy-api':               'http://www.github.com/zhex.json',
+    
+    // proxy can do fuzzy mapping;
+    // in the setting, if you visit /books/hello, it will map to http://example.com/books/hello
     'ALL::/books/:pattern*':    'http://example.com/books/'
 };
 ```
