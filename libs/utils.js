@@ -27,3 +27,5 @@ exports.serialize = function (obj, delimiter) {
 exports.moment = require('moment');
 
 exports.assign = require('object-assign');
+
+exports.Mock = require('mockjs');
