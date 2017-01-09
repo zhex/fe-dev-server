@@ -46,8 +46,15 @@ module.exports = function (config) {
 			express.static(config.publicFolder)
 		);
 
+		var exts = [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ];
+		if (config.livereload.exts) exts = config.livereload.exts;
+
+		var exclusions = [/node_modules/];
+		if (config.livereload.exclusions) exclusions = config.livereload.exclusions;
+
 		var lrServer = livereload.createServer({
-			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ],
+			exts: exts;
+			exclusions: exclusions,
 			port: config.livereloadPort
 		});
 
