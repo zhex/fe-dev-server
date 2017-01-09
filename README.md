@@ -229,7 +229,7 @@ FE server will run a child process for light java server to serve the templates 
 
 default: true
 
-livereload is awesome, it will refresh your browser automatically after anything changed. If you dont like this feature, you can set it to `false` to switch it off.
+livereload is awesome, it will refresh your browser automatically after anything changed. If you dont like this feature, you can set it to `false` to switch it off. also you can set it as a **livereload option object**;
 
 ### open
 
