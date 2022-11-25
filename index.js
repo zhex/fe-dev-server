@@ -1,5 +1,4 @@
 require('@colors/colors');
-var path = require('path');
 var url = require('url');
 var express = require('express');
 var cons = require('consolidate');
@@ -85,7 +84,7 @@ module.exports = function (config) {
 
 	app.openBrowser = function () {
 		var openMe = function () {
-			var url = 'http://localhost:' + config.port + (config.open.route || '/');
+			const url = 'http://localhost:' + config.port + (config.open.route || '/');
 			open(url, { app: config.open.browser });
 		};
 
