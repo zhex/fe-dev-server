@@ -35,13 +35,13 @@ $ fds init
 start up server
 
 ```
-$ fds
+$ fds server
 ```
 
 start up server & open browser
 
 ```
-$ fds -o
+$ fds server -o
 ```
 
 Also, it can be integrated into your own project as a node module.
@@ -195,18 +195,6 @@ default: ['.js', '.json']
 
 Some people like to set mockFolder as the same as viewFolder for convinence reason, `mockExts` give you the ability to define your own mock file type to avoid the conflict issue. Also, the ext order in array demonstrate the priority from higher to lower.
 
-### proxy (Deprecated, using router proxy instead)
-
-default: null
-
-During the test, we want to get the api data from the real backend server; then we can proxy the url to the backend server. And multiple proxies are allowed.
-
-```js
-proxy: {
-    '/api': 'http://www.example.com/api'
-}
-```
-
 ### port
 
 default: 3000
@@ -218,12 +206,6 @@ Express server port
 default: true
 
 Sometimes you don't need to support java templates, you can turn it off with this property to `false`.
-
-### javaServerPort (Deprecated, port will be auto generated)
-
-default: 12321
-
-FE server will run a child process for light java server to serve the templates in java, you can change the java server port if it is conflict with your other service.
 
 ### livereload
 
