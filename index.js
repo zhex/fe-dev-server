@@ -23,7 +23,7 @@ module.exports = function (config) {
 	app.use(require('morgan')('dev'));
 
 	app.engine('html', cons.ejs);
-	app.engine('jade', cons.jade);
+	app.engine('pug', cons.pug);
 	app.engine('hbs', cons.handlebars);
 
 	app.set('view engine', 'html');
