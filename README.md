@@ -67,8 +67,8 @@ module.exports = {
     // set /test route to test.html page, default http method is GET
     '/test':                    'test.html',
     
-    // set /books route to books.jade template with GET method
-    'GET::/books':              'books.jade',
+    // set /books route to books.pug template with GET method
+    'GET::/books':              'books.pug',
     
     // set json api with a json file in mock folder
     'POST::/api/books':         'mock::books.json',
@@ -137,7 +137,7 @@ Also, you can add `$$header` in the data file to extend http response header, an
 
 ## embedded template engines
 
-- [jade](http://jade-lang.com/)
+- [pug](https://pugjs.org/api/getting-started.html)
 - [handlebars](http://handlebarsjs.com/)
 - [ejs](http://www.embeddedjs.com/)
 - [jsp](https://en.wikipedia.org/wiki/JavaServer_Pages) (java)
