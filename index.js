@@ -48,8 +48,7 @@ module.exports = function (config) {
 
 		var options = {
 			exts: [ 'html', 'css', 'js', 'png', 'gif', 'jpg', 'json', 'jsp', 'vm' ],
-			exclusions: [/node_modules/],
-			port: config.livereloadPort
+			exclusions: [/node_modules/, /.git/],
 		};
 
 		if (utils.isObject(config.livereload))
@@ -97,6 +96,10 @@ module.exports = function (config) {
 			openMe();
 		}
 	};
+
+	app.destroy = function() {
+		process.exit();
+	}
 
 	app.listen(config.port, function () {
 		console.log('FE Dev Server is listening on port '.green + config.port.toString().green);

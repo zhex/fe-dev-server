@@ -1,4 +1,3 @@
-var fs = require('fs');
 var pathRegexp = require('path-to-regexp');
 var chokidar = require('chokidar');
 
@@ -40,7 +39,7 @@ Router.prototype.search = function (url, method) {
 	method = method.toLowerCase();
 
 	this.routes.some(function (r) {
-		var re = pathRegexp(r.route);
+		var re = pathRegexp.pathToRegexp(r.route);
 		var result = re.exec(url);
 
 		if (result && (r.method.toLowerCase() === 'all' || r.method.toLowerCase() === method)) {

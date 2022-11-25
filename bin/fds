@@ -2,7 +2,6 @@
 
 var path = require('path');
 var fs = require('fs-extra');
-var color = require('colors');
 var program = require('commander');
 var findup = require('findup-sync');
 var fds = require('../index');
