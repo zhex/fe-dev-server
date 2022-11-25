@@ -241,6 +241,6 @@ Browser setting allow you to open dev site automatically on server started with 
 $ fds -o
 ```
 
-## Lisence
+## License
 
 This project is licensed under the terms of the MIT license.
