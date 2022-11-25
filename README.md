@@ -238,7 +238,7 @@ default: { route: '/', browser: ['google chrome'] }
 Browser setting allow you to open dev site automatically on server started with `-o` option in cli. It will open google chrome by default. 
 
 ```
-$ fds -o
+$ fds server -o
 ```
 
 ## License

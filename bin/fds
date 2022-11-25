@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+require('@colors/colors');
 var path = require('path');
 var fs = require('fs-extra');
 var program = require('commander');
@@ -8,8 +9,8 @@ var fds = require('../index');
 
 program
 	.version(require('../package.json').version, '-v --version')
-	.usage('<command> [options]')
-	.option('-o --open', 'open site in browser after server startup');
+	.option('-o, --open', 'open site in browser after server startup')
+	.usage('<command> [options]');
 
 program
 	.command('init [name]')
@@ -17,13 +18,11 @@ program
 	.action(init);
 
 program
-	.command('')
-	.description('startup server');
+	.command('server')
+	.description('startup server')
+	.action(server);
 
 program.parse(process.argv);
-
-if (!program.args.length) server();
-
 
 function init(name, opts) {
 	var dest = process.cwd();
@@ -48,6 +47,7 @@ function server() {
 
 	var app = fds(configFile);
 
-	if (program.open) app.openBrowser();
+	const options = program.opts();
+	if (options.open) app.openBrowser();
 }
 

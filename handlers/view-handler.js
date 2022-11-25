@@ -1,4 +1,3 @@
-var DataSet = require('../libs/dataset');
 var lrScript = require('../libs/lr-script');
 
 module.exports = function (req, res, next) {

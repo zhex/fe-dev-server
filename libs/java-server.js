@@ -1,3 +1,4 @@
+require('@colors/colors');
 var path = require('path');
 var spawn = require('cross-spawn');
 var EventEmitter = require('events');

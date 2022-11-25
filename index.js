@@ -1,3 +1,4 @@
+require('@colors/colors');
 var path = require('path');
 var url = require('url');
 var express = require('express');
