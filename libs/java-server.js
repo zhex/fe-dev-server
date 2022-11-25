@@ -1,6 +1,5 @@
 var path = require('path');
 var spawn = require('cross-spawn');
-var colors = require('colors');
 var EventEmitter = require('events');
 var util = require('util');
 

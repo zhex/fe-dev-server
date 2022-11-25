@@ -1,7 +1,6 @@
 var path = require('path');
 var request = require('request');
 var utils = require('../libs/utils');
-var DataSet = require('../libs/dataset');
 var lrScript = require('../libs/lr-script');
 
 module.exports = function (req, res, next) {

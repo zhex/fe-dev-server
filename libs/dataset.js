@@ -2,7 +2,6 @@ var path = require('path');
 var fs = require('fs');
 var vm = require('vm');
 var check = require('syntax-error');
-var colors = require('colors');
 var utils = require('./utils');
 
 function DataSet(path, exts) {

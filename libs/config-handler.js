@@ -3,7 +3,6 @@ var fs = require('fs');
 var assign = require('object-assign');
 var portscanner = require('portscanner');
 var deasync = require('deasync');
-var colors = require('colors');
 
 var defaultJavaPort = 12321;
 var defaultLivereloadPort = 35729;
