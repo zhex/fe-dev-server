@@ -20,13 +20,14 @@ jobs:
       - name: Run test
         run: pnpm test
 
+      - name: Get current package version
+        uses: martinbeentjes/npm-get-version-action@v1.2.3
+        id: pkg_version
+
       - name: Publish package to NPM
-        uses: pascalgn/npm-publish-action@1.3.9
-        with:
-          tag_name: "%s"
+        run: npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -39,10 +40,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Get current package version
-        uses: martinbeentjes/npm-get-version-action@v1.2.3
-        id: pkg_version
 
       - name: Publish image to Docker
         uses: docker/build-push-action@v3
