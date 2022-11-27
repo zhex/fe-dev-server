@@ -1,2 +1,7 @@
 *.md
 test/
+Dockerfile
+License
+pnpm-lock.yaml
+.editorconfig
+.prettierrc
