@@ -1,4 +1,4 @@
-# FE Dev Server ![build status](https://travis-ci.org/zhex/fe-dev-server.svg)
+# FE Dev Server [![Build and Deploy](https://github.com/zhex/fe-dev-server/actions/workflows/deploy.yml/badge.svg)](https://github.com/zhex/fe-dev-server/actions/workflows/deploy.yml)
 
 FE Dev Server target to help frontend web developers create view template, styles and js easily. It try the best to simulate real server environment which can help you to make you job done. 
 
