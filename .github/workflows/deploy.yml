@@ -54,4 +54,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fe-dev-server:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/fe-dev-server:${{ steps.pkg_version.outputs.tag }}
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fe-dev-server:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/fe-dev-server:${{ steps.pkg_version.outputs.current-version }}
