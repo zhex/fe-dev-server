@@ -24,7 +24,15 @@ jobs:
         uses: martinbeentjes/npm-get-version-action@v1.2.3
         id: pkg_version
 
+      - name: Get changed for package.json
+        id: pkg-changed
+        uses: tj-actions/changed-files@v34
+        with:
+          files: |
+            package.json
+
       - name: Publish package to NPM
+        if: steps.pkg-changed.outputs.any_changed == 'true'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
