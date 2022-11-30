@@ -58,4 +58,5 @@ jobs:
         with:
           context: .
           push: true
+          platforms: arm64,amd64
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/fe-dev-server:latest, ${{ secrets.DOCKER_HUB_USERNAME }}/fe-dev-server:${{ steps.pkg_version.outputs.current-version }}
